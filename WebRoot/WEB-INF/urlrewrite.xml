@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<urlrewrite>
+	<rule>
+		<from>/(.*).html</from><!-- 短url服务 -->
+		<to>testStruts2Action.action</to>
+	</rule>
+	<!-- 
+	<rule>
+		<from>^/news-([0-9]+)-([0-9]+)\.htm$</from>
+		<to type="forward">/news-list.action?id=$1&amp;page=$2</to>
+	</rule> -->
+</urlrewrite>
