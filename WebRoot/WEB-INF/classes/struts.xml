@@ -41,8 +41,6 @@
 				class="com.jsu.ic.interceptor.CharacterEncodingInterceptor" />
 			<interceptor name="CodeExceptionInterceptor"
 				class="com.jsu.ic.interceptor.CodeExceptionInterceptor" />
-			<interceptor name="AutoAttrAndSessionUserInterceptor"
-				class="com.jsu.ic.interceptor.AutoAttrAndSessionUserInterceptor" />
 			<interceptor name="AccessControlInterceptor"
 				class="com.jsu.ic.interceptor.AccessControlInterceptor" />
 			<interceptor name="LogInterceptor" class="com.jsu.ic.interceptor.LogInterceptor" />
@@ -52,8 +50,6 @@
 				<interceptor-ref name="TestUserInterceptor" /><!-- 自动添加一个登陆用户，开发测试用，发布时，请删除 -->
 				<interceptor-ref name="CharacterEncodingInterceptor" /><!-- 
 					Action之前，编码设置，一开始就设置好，所以放最前面 -->
-				<interceptor-ref name="AutoAttrAndSessionUserInterceptor" /><!-- 
-					Action之前，自动注入登陆用户，放什么位置都没有关系，默认之前 -->
 				<interceptor-ref name="LogInterceptor" /><!-- Action之后，日志记录 -->
 				<interceptor-ref name="CodeExceptionInterceptor" /><!-- 
 					Action之后，异常信息加载，会在Action执行之后，考虑到权限控制也会抛出异常，所以应该放在这个之前 -->

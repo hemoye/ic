@@ -13,17 +13,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jsu.ic.utils.QueryHelper;
+import com.jsu.ic.commons.QueryHelper;
 import com.jsu.ic.vo.PageBean;
 /**
  * @author 木木
  *
  */
 
-// @Transactional注解可以被继承
-// @Transactional注解对父类中声明的方法无效
-@Transactional
 @SuppressWarnings("unchecked")
+@Transactional
 public abstract class DaoSupportImpl<T> implements DaoSupport<T> {
 
 	@Resource(name="sessionFactory")

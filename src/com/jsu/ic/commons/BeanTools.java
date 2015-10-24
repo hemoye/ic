@@ -64,8 +64,9 @@ public class BeanTools {
 				for (String fieldName : po2vo.value()) {
 					try {
 						Object temp = getFieldValue(sourceObject, fieldName);
-						if (temp != null) {
-							BeanUtils.copyProperties(temp, targetObject, ignoreProperties);
+						if (temp != null) { // 将内部类拷贝进对象中
+							String childString = fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1) + "VO";
+							setWithinClass(childString, temp, targetObject);
 						}
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -73,6 +74,28 @@ public class BeanTools {
 					}
 				}
 			}
+		}
+	}
+
+	/**
+	 * 设置内部类对象值
+	 * 
+	 * @param childString
+	 *            字段名
+	 * @param temp
+	 *            源对象
+	 * @param targetObject
+	 *            目标对象
+	 */
+	public static void setWithinClass(String childString, Object temp, Object targetObject) {
+		try {
+			Object children = Class.forName("com.jsu.ic.vo." + childString).newInstance(); // 得到内部对象
+			copyProperties(temp, children); // 拷贝
+			// 调用set方法设置值
+			targetObject.getClass().getDeclaredMethod("set" + childString, children.getClass()).invoke(targetObject, children);
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
