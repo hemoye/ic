@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<types>
+	<type>
+		<name>文档</name>
+	</type>
+	<type>
+		<name>视频</name>
+	</type>
+	<type>
+		<name>压缩文件</name>
+	</type>
+</types>

@@ -6,7 +6,7 @@ import com.jsu.ic.base.DaoSupportImpl;
 import com.jsu.ic.dao.ResourceTypeDAO;
 import com.jsu.ic.po.Resourcetype;
 
-@Repository
+@Repository("resourceTypeDAO")
 public class ResourceTypeDAOImpl extends DaoSupportImpl<Resourcetype> implements ResourceTypeDAO {
 
 }

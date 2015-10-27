@@ -1,0 +1,3 @@
+function submitCourse() {
+	$("#course").submit();
+}

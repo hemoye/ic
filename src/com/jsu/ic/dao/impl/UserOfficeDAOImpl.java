@@ -6,7 +6,7 @@ import com.jsu.ic.base.DaoSupportImpl;
 import com.jsu.ic.dao.UserOfficeDAO;
 import com.jsu.ic.po.Useroffice;
 
-@Repository
+@Repository("userOfficeDAO")
 public class UserOfficeDAOImpl extends DaoSupportImpl<Useroffice> implements UserOfficeDAO {
 
 }

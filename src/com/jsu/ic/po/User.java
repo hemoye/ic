@@ -33,18 +33,16 @@ public class User implements java.io.Serializable {
 	/** default constructor */
 	public User() {
 	}
-	
+
 	public User(Integer userId) {
 		this.userId = userId;
 	}
 
 	/** minimal constructor */
-	public User(String userName, String userPwd, Timestamp frostTime, Boolean isDelete, Integer sortNumber) {
+	public User(String userName, String userPwd, Timestamp frostTime) {
 		this.userName = userName;
 		this.userPwd = userPwd;
 		this.frostTime = frostTime;
-		this.isDelete = isDelete;
-		this.sortNumber = sortNumber;
 	}
 
 	/** full constructor */

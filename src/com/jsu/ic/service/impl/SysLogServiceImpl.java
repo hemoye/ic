@@ -6,7 +6,7 @@ import com.jsu.ic.base.DaoSupportImpl;
 import com.jsu.ic.po.Syslog;
 import com.jsu.ic.service.SysLogService;
 
-@Service
+@Service("sysLogService")
 public class SysLogServiceImpl extends DaoSupportImpl<Syslog> implements SysLogService {
 
 }

@@ -23,13 +23,13 @@
             <column name="sendTime" length="19" not-null="true" />
         </property>
         <property name="status" type="java.lang.Integer">
-            <column name="status" not-null="true" />
+            <column name="status" />
         </property>
         <property name="isDelete" type="java.lang.Boolean">
-            <column name="isDelete" not-null="true" />
+            <column name="isDelete" />
         </property>
         <property name="sortNumber" type="java.lang.Integer">
-            <column name="sortNumber" not-null="true" />
+            <column name="sortNumber" />
         </property>
     </class>
 </hibernate-mapping>

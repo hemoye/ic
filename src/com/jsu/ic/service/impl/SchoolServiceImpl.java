@@ -6,7 +6,7 @@ import com.jsu.ic.base.DaoSupportImpl;
 import com.jsu.ic.po.School;
 import com.jsu.ic.service.SchoolService;
 
-@Service
+@Service("schoolService")
 public class SchoolServiceImpl extends DaoSupportImpl<School> implements SchoolService {
 
 }

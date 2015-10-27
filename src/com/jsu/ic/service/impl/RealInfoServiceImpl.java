@@ -6,7 +6,7 @@ import com.jsu.ic.base.DaoSupportImpl;
 import com.jsu.ic.po.Realinfo;
 import com.jsu.ic.service.RealInfoService;
 
-@Service
+@Service("realInfoService")
 public class RealInfoServiceImpl extends DaoSupportImpl<Realinfo> implements RealInfoService {
 
 }

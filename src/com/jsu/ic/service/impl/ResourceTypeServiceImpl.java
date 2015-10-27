@@ -6,7 +6,7 @@ import com.jsu.ic.base.DaoSupportImpl;
 import com.jsu.ic.po.Resourcetype;
 import com.jsu.ic.service.ResourceTypeService;
 
-@Service
+@Service("resourceTypeService")
 public class ResourceTypeServiceImpl extends DaoSupportImpl<Resourcetype> implements ResourceTypeService {
 
 }

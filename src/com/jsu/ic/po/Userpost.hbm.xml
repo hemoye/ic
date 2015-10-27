@@ -35,17 +35,23 @@
             <column name="replyTime" length="19" not-null="true" />
         </property>
         <property name="clickNumber" type="java.lang.Integer">
-            <column name="clickNumber" not-null="true" />
+            <column name="clickNumber" />
         </property>
         <property name="replyNumber" type="java.lang.Integer">
-            <column name="replyNumber" not-null="true" />
+            <column name="replyNumber" />
         </property>
         <property name="isDelete" type="java.lang.Boolean">
-            <column name="isDelete" not-null="true" />
+            <column name="isDelete" />
         </property>
         <property name="sortNumber" type="java.lang.Integer">
-            <column name="sortNumber" not-null="true" />
+            <column name="sortNumber" />
         </property>
+        <set name="attentions" inverse="true">
+            <key>
+                <column name="postId" />
+            </key>
+            <one-to-many class="com.jsu.ic.po.Attention" />
+        </set>
         <set name="replies" inverse="true">
             <key>
                 <column name="postId" />

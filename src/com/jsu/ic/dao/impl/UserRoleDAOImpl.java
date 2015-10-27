@@ -6,7 +6,7 @@ import com.jsu.ic.base.DaoSupportImpl;
 import com.jsu.ic.dao.UserRoleDAO;
 import com.jsu.ic.po.Userrole;
 
-@Repository
+@Repository("userRoleDAO")
 public class UserRoleDAOImpl extends DaoSupportImpl<Userrole> implements UserRoleDAO {
 
 }

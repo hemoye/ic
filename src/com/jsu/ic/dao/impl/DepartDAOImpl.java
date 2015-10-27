@@ -6,7 +6,7 @@ import com.jsu.ic.base.DaoSupportImpl;
 import com.jsu.ic.dao.DepartDAO;
 import com.jsu.ic.po.Depart;
 
-@Repository
+@Repository("departDAO")
 public class DepartDAOImpl extends DaoSupportImpl<Depart> implements DepartDAO {
 
 }

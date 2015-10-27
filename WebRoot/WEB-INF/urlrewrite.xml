@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <urlrewrite>
 	<rule>
-		<from>/(.*).html</from><!-- 短url服务 -->
+		<from>testStruts2Action.html</from><!-- 短url服务 -->
 		<to>testStruts2Action.action</to>
 	</rule>
 	<!-- 

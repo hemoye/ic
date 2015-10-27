@@ -1,0 +1,15 @@
+#user-ban-tab .user-reason strong {
+	display: block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 200px;
+}
+
+#user-ban-tab .user-reason-list strong {
+	display: block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 400px;
+}

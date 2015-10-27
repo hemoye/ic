@@ -59,5 +59,6 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mail-1.4.1.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mysql-connector-java-5.1.10-bin.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/hibernate/ejb3-persistence.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/dom4j-1.6.1.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

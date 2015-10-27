@@ -4,114 +4,123 @@ import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
+
 /**
  * Resourcetype entity. @author MyEclipse Persistence Tools
  */
 
-public class Resourcetype implements java.io.Serializable {
+public class Resourcetype  implements java.io.Serializable {
 
-	// Fields
 
-	private Integer typeId;
-	private String typeName;
-	private String typeDesc;
-	private Timestamp addTime;
-	private Timestamp updateTime;
-	private Boolean isDelete;
-	private Integer sortNumber;
-	private Set postresources = new HashSet(0);
+    // Fields    
 
-	// Constructors
+     private Integer typeId;
+     private String typeName;
+     private String typeDesc;
+     private Timestamp addTime;
+     private Timestamp updateTime;
+     private Boolean isDelete;
+     private Integer sortNumber;
+     private Set postresources = new HashSet(0);
 
-	/** default constructor */
-	public Resourcetype() {
-	}
+
+    // Constructors
+
+    /** default constructor */
+    public Resourcetype() {
+    }
 
 	/** minimal constructor */
-	public Resourcetype(String typeName, Timestamp addTime, Timestamp updateTime, Boolean isDelete, Integer sortNumber) {
-		this.typeName = typeName;
-		this.addTime = addTime;
-		this.updateTime = updateTime;
-		this.isDelete = isDelete;
-		this.sortNumber = sortNumber;
-	}
+    public Resourcetype(String typeName, Timestamp addTime, Timestamp updateTime) {
+        this.typeName = typeName;
+        this.addTime = addTime;
+        this.updateTime = updateTime;
+    }
+    
+    /** full constructor */
+    public Resourcetype(String typeName, String typeDesc, Timestamp addTime, Timestamp updateTime, Boolean isDelete, Integer sortNumber, Set postresources) {
+        this.typeName = typeName;
+        this.typeDesc = typeDesc;
+        this.addTime = addTime;
+        this.updateTime = updateTime;
+        this.isDelete = isDelete;
+        this.sortNumber = sortNumber;
+        this.postresources = postresources;
+    }
 
-	/** full constructor */
-	public Resourcetype(String typeName, String typeDesc, Timestamp addTime, Timestamp updateTime, Boolean isDelete,
-			Integer sortNumber, Set postresources) {
-		this.typeName = typeName;
-		this.typeDesc = typeDesc;
-		this.addTime = addTime;
-		this.updateTime = updateTime;
-		this.isDelete = isDelete;
-		this.sortNumber = sortNumber;
-		this.postresources = postresources;
-	}
+   
+    // Property accessors
 
-	// Property accessors
+    public Integer getTypeId() {
+        return this.typeId;
+    }
+    
+    public void setTypeId(Integer typeId) {
+        this.typeId = typeId;
+    }
 
-	public Integer getTypeId() {
-		return this.typeId;
-	}
+    public String getTypeName() {
+        return this.typeName;
+    }
+    
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
 
-	public void setTypeId(Integer typeId) {
-		this.typeId = typeId;
-	}
+    public String getTypeDesc() {
+        return this.typeDesc;
+    }
+    
+    public void setTypeDesc(String typeDesc) {
+        this.typeDesc = typeDesc;
+    }
 
-	public String getTypeName() {
-		return this.typeName;
-	}
+    public Timestamp getAddTime() {
+        return this.addTime;
+    }
+    
+    public void setAddTime(Timestamp addTime) {
+        this.addTime = addTime;
+    }
 
-	public void setTypeName(String typeName) {
-		this.typeName = typeName;
-	}
+    public Timestamp getUpdateTime() {
+        return this.updateTime;
+    }
+    
+    public void setUpdateTime(Timestamp updateTime) {
+        this.updateTime = updateTime;
+    }
 
-	public String getTypeDesc() {
-		return this.typeDesc;
-	}
+    public Boolean getIsDelete() {
+        return this.isDelete;
+    }
+    
+    public void setIsDelete(Boolean isDelete) {
+        this.isDelete = isDelete;
+    }
 
-	public void setTypeDesc(String typeDesc) {
-		this.typeDesc = typeDesc;
-	}
+    public Integer getSortNumber() {
+        return this.sortNumber;
+    }
+    
+    public void setSortNumber(Integer sortNumber) {
+        this.sortNumber = sortNumber;
+    }
 
-	public Timestamp getAddTime() {
-		return this.addTime;
-	}
+    public Set getPostresources() {
+        return this.postresources;
+    }
+    
+    public void setPostresources(Set postresources) {
+        this.postresources = postresources;
+    }
+   
 
-	public void setAddTime(Timestamp addTime) {
-		this.addTime = addTime;
-	}
 
-	public Timestamp getUpdateTime() {
-		return this.updateTime;
-	}
 
-	public void setUpdateTime(Timestamp updateTime) {
-		this.updateTime = updateTime;
-	}
 
-	public Boolean getIsDelete() {
-		return this.isDelete;
-	}
 
-	public void setIsDelete(Boolean isDelete) {
-		this.isDelete = isDelete;
-	}
 
-	public Integer getSortNumber() {
-		return this.sortNumber;
-	}
 
-	public void setSortNumber(Integer sortNumber) {
-		this.sortNumber = sortNumber;
-	}
-
-	public Set getPostresources() {
-		return this.postresources;
-	}
-
-	public void setPostresources(Set postresources) {
-		this.postresources = postresources;
-	}
 
 }

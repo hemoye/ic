@@ -6,7 +6,7 @@ import com.jsu.ic.base.DaoSupportImpl;
 import com.jsu.ic.po.Useroffice;
 import com.jsu.ic.service.UserOfficeService;
 
-@Service
+@Service("userOfficeService")
 public class UserOfficeServiceImpl extends DaoSupportImpl<Useroffice> implements UserOfficeService {
 
 }

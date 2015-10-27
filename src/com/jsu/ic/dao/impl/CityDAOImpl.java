@@ -6,7 +6,7 @@ import com.jsu.ic.base.DaoSupportImpl;
 import com.jsu.ic.dao.CityDAO;
 import com.jsu.ic.po.City;
 
-@Repository
+@Repository("cityDAO")
 public class CityDAOImpl extends DaoSupportImpl<City> implements CityDAO {
 
 }

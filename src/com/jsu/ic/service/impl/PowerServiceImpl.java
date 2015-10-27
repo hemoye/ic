@@ -6,7 +6,7 @@ import com.jsu.ic.base.DaoSupportImpl;
 import com.jsu.ic.po.Power;
 import com.jsu.ic.service.PowerService;
 
-@Service
+@Service("powerService")
 public class PowerServiceImpl extends DaoSupportImpl<Power> implements PowerService {
 
 }

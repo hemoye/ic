@@ -12,6 +12,13 @@ import com.jsu.ic.vo.PageBean;
 public interface DaoSupport<T> {
 
 	/**
+	 * 运行SQL语句
+	 * 
+	 * @param sqlString
+	 */
+	public void runSQLString(String sqlString);
+
+	/**
 	 * 保存实体
 	 * 
 	 * @param entity
@@ -56,6 +63,15 @@ public interface DaoSupport<T> {
 	 * @return T实体的集合
 	 */
 	public List<T> findByProperty(String propertyName, Object value);
+
+	/**
+	 * 根据某一个属性来查找
+	 * 
+	 * @param propertyName
+	 * @param value
+	 * @return T实体的集合
+	 */
+	public T findByProperty(String propertyName, String value);
 
 	/**
 	 * 查询所有

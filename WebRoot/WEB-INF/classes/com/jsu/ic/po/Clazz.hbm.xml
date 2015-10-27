@@ -17,7 +17,7 @@
             <column name="classNum" length="40" not-null="true" />
         </property>
         <property name="stuNum" type="java.lang.Integer">
-            <column name="stuNum" not-null="true" />
+            <column name="stuNum" />
         </property>
         <property name="addTime" type="java.sql.Timestamp">
             <column name="addTime" length="19" not-null="true" />
@@ -26,16 +26,22 @@
             <column name="updateTime" length="19" not-null="true" />
         </property>
         <property name="isDelete" type="java.lang.Boolean">
-            <column name="isDelete" not-null="true" />
+            <column name="isDelete" />
         </property>
         <property name="sortNumber" type="java.lang.Integer">
-            <column name="sortNumber" not-null="true" />
+            <column name="sortNumber" />
         </property>
         <set name="realinfos" inverse="true">
             <key>
                 <column name="classId" />
             </key>
             <one-to-many class="com.jsu.ic.po.Realinfo" />
+        </set>
+        <set name="approves" inverse="true">
+            <key>
+                <column name="classId" />
+            </key>
+            <one-to-many class="com.jsu.ic.po.Approve" />
         </set>
     </class>
 </hibernate-mapping>

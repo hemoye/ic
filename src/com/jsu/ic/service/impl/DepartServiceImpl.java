@@ -6,7 +6,7 @@ import com.jsu.ic.base.DaoSupportImpl;
 import com.jsu.ic.po.Depart;
 import com.jsu.ic.service.DepartService;
 
-@Service
+@Service("departService")
 public class DepartServiceImpl extends DaoSupportImpl<Depart> implements DepartService {
 
 }

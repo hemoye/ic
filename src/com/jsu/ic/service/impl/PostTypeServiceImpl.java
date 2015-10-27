@@ -6,7 +6,7 @@ import com.jsu.ic.base.DaoSupportImpl;
 import com.jsu.ic.po.Posttype;
 import com.jsu.ic.service.PostTypeService;
 
-@Service
+@Service("postTypeService")
 public class PostTypeServiceImpl extends DaoSupportImpl<Posttype> implements PostTypeService {
 
 }

@@ -4,310 +4,334 @@ import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
+
 /**
  * Userinfo entity. @author MyEclipse Persistence Tools
  */
 
-public class Userinfo implements java.io.Serializable {
+public class Userinfo  implements java.io.Serializable {
 
-	// Fields
 
-	private Integer userId;
-	private Useroffice useroffice;
-	private Realinfo realinfo;
-	private User user;
-	private County county;
-	private String realName;
-	private String userSex;
-	private Timestamp birthday;
-	private Timestamp registTime;
-	private String signature;
-	private Integer loginNumber;
-	private Timestamp loginTime;
-	private String theme;
-	private String pagebuider;
-	private String pageanimation;
-	private String bstyle;
-	private String bcolor;
-	private Boolean isDelete;
-	private Integer sortNumber;
-	private Set userposts = new HashSet(0);
-	private Set applyfriendsForApplyUserId = new HashSet(0);
-	private Set userrelationsForUserIdB = new HashSet(0);
-	private Set keywords = new HashSet(0);
-	private Set userrelationsForUserIdA = new HashSet(0);
-	private Set syslogs = new HashSet(0);
-	private Set replies = new HashSet(0);
-	private Set applyfriendsForRecUserId = new HashSet(0);
+    // Fields    
 
-	// Constructors
+     private Integer userId;
+     private Useroffice useroffice;
+     private Realinfo realinfo;
+     private User user;
+     private County county;
+     private String realName;
+     private String userSex;
+     private Timestamp birthday;
+     private Timestamp registTime;
+     private String signature;
+     private Integer loginNumber;
+     private Timestamp loginTime;
+     private String theme;
+     private String pagebuider;
+     private String pageanimation;
+     private String bstyle;
+     private String bcolor;
+     private Boolean isDelete;
+     private Integer sortNumber;
+     private Set userposts = new HashSet(0);
+     private Set applyfriendsForApplyUserId = new HashSet(0);
+     private Set userrelationsForUserIdB = new HashSet(0);
+     private Set keywords = new HashSet(0);
+     private Set userrelationsForUserIdA = new HashSet(0);
+     private Set syslogs = new HashSet(0);
+     private Set attentions = new HashSet(0);
+     private Set approves = new HashSet(0);
+     private Set replies = new HashSet(0);
+     private Set applyfriendsForRecUserId = new HashSet(0);
 
-	/** default constructor */
-	public Userinfo() {
-	}
+
+    // Constructors
+
+    /** default constructor */
+    public Userinfo() {
+    }
 
 	/** minimal constructor */
-	public Userinfo(User user, Timestamp birthday, Timestamp registTime, Integer loginNumber, Timestamp loginTime,
-			Boolean isDelete, Integer sortNumber) {
-		this.user = user;
-		this.birthday = birthday;
-		this.registTime = registTime;
-		this.loginNumber = loginNumber;
-		this.loginTime = loginTime;
-		this.isDelete = isDelete;
-		this.sortNumber = sortNumber;
-	}
+    public Userinfo(User user, Timestamp birthday, Timestamp registTime, Timestamp loginTime) {
+        this.user = user;
+        this.birthday = birthday;
+        this.registTime = registTime;
+        this.loginTime = loginTime;
+    }
+    
+    /** full constructor */
+    public Userinfo(Useroffice useroffice, Realinfo realinfo, User user, County county, String realName, String userSex, Timestamp birthday, Timestamp registTime, String signature, Integer loginNumber, Timestamp loginTime, String theme, String pagebuider, String pageanimation, String bstyle, String bcolor, Boolean isDelete, Integer sortNumber, Set userposts, Set applyfriendsForApplyUserId, Set userrelationsForUserIdB, Set keywords, Set userrelationsForUserIdA, Set syslogs, Set attentions, Set approves, Set replies, Set applyfriendsForRecUserId) {
+        this.useroffice = useroffice;
+        this.realinfo = realinfo;
+        this.user = user;
+        this.county = county;
+        this.realName = realName;
+        this.userSex = userSex;
+        this.birthday = birthday;
+        this.registTime = registTime;
+        this.signature = signature;
+        this.loginNumber = loginNumber;
+        this.loginTime = loginTime;
+        this.theme = theme;
+        this.pagebuider = pagebuider;
+        this.pageanimation = pageanimation;
+        this.bstyle = bstyle;
+        this.bcolor = bcolor;
+        this.isDelete = isDelete;
+        this.sortNumber = sortNumber;
+        this.userposts = userposts;
+        this.applyfriendsForApplyUserId = applyfriendsForApplyUserId;
+        this.userrelationsForUserIdB = userrelationsForUserIdB;
+        this.keywords = keywords;
+        this.userrelationsForUserIdA = userrelationsForUserIdA;
+        this.syslogs = syslogs;
+        this.attentions = attentions;
+        this.approves = approves;
+        this.replies = replies;
+        this.applyfriendsForRecUserId = applyfriendsForRecUserId;
+    }
 
-	/** full constructor */
-	public Userinfo(Useroffice useroffice, Realinfo realinfo, User user, County county, String realName, String userSex,
-			Timestamp birthday, Timestamp registTime, String signature, Integer loginNumber, Timestamp loginTime, String theme,
-			String pagebuider, String pageanimation, String bstyle, String bcolor, Boolean isDelete, Integer sortNumber,
-			Set userposts, Set applyfriendsForApplyUserId, Set userrelationsForUserIdB, Set keywords,
-			Set userrelationsForUserIdA, Set syslogs, Set replies, Set applyfriendsForRecUserId) {
-		this.useroffice = useroffice;
-		this.realinfo = realinfo;
-		this.user = user;
-		this.county = county;
-		this.realName = realName;
-		this.userSex = userSex;
-		this.birthday = birthday;
-		this.registTime = registTime;
-		this.signature = signature;
-		this.loginNumber = loginNumber;
-		this.loginTime = loginTime;
-		this.theme = theme;
-		this.pagebuider = pagebuider;
-		this.pageanimation = pageanimation;
-		this.bstyle = bstyle;
-		this.bcolor = bcolor;
-		this.isDelete = isDelete;
-		this.sortNumber = sortNumber;
-		this.userposts = userposts;
-		this.applyfriendsForApplyUserId = applyfriendsForApplyUserId;
-		this.userrelationsForUserIdB = userrelationsForUserIdB;
-		this.keywords = keywords;
-		this.userrelationsForUserIdA = userrelationsForUserIdA;
-		this.syslogs = syslogs;
-		this.replies = replies;
-		this.applyfriendsForRecUserId = applyfriendsForRecUserId;
-	}
+   
+    // Property accessors
 
-	// Property accessors
+    public Integer getUserId() {
+        return this.userId;
+    }
+    
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
-	public Integer getUserId() {
-		return this.userId;
-	}
+    public Useroffice getUseroffice() {
+        return this.useroffice;
+    }
+    
+    public void setUseroffice(Useroffice useroffice) {
+        this.useroffice = useroffice;
+    }
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
+    public Realinfo getRealinfo() {
+        return this.realinfo;
+    }
+    
+    public void setRealinfo(Realinfo realinfo) {
+        this.realinfo = realinfo;
+    }
 
-	public Useroffice getUseroffice() {
-		return this.useroffice;
-	}
+    public User getUser() {
+        return this.user;
+    }
+    
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-	public void setUseroffice(Useroffice useroffice) {
-		this.useroffice = useroffice;
-	}
+    public County getCounty() {
+        return this.county;
+    }
+    
+    public void setCounty(County county) {
+        this.county = county;
+    }
 
-	public Realinfo getRealinfo() {
-		return this.realinfo;
-	}
+    public String getRealName() {
+        return this.realName;
+    }
+    
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
 
-	public void setRealinfo(Realinfo realinfo) {
-		this.realinfo = realinfo;
-	}
+    public String getUserSex() {
+        return this.userSex;
+    }
+    
+    public void setUserSex(String userSex) {
+        this.userSex = userSex;
+    }
 
-	public User getUser() {
-		return this.user;
-	}
+    public Timestamp getBirthday() {
+        return this.birthday;
+    }
+    
+    public void setBirthday(Timestamp birthday) {
+        this.birthday = birthday;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public Timestamp getRegistTime() {
+        return this.registTime;
+    }
+    
+    public void setRegistTime(Timestamp registTime) {
+        this.registTime = registTime;
+    }
 
-	public County getCounty() {
-		return this.county;
-	}
+    public String getSignature() {
+        return this.signature;
+    }
+    
+    public void setSignature(String signature) {
+        this.signature = signature;
+    }
 
-	public void setCounty(County county) {
-		this.county = county;
-	}
+    public Integer getLoginNumber() {
+        return this.loginNumber;
+    }
+    
+    public void setLoginNumber(Integer loginNumber) {
+        this.loginNumber = loginNumber;
+    }
 
-	public String getRealName() {
-		return this.realName;
-	}
+    public Timestamp getLoginTime() {
+        return this.loginTime;
+    }
+    
+    public void setLoginTime(Timestamp loginTime) {
+        this.loginTime = loginTime;
+    }
 
-	public void setRealName(String realName) {
-		this.realName = realName;
-	}
+    public String getTheme() {
+        return this.theme;
+    }
+    
+    public void setTheme(String theme) {
+        this.theme = theme;
+    }
 
-	public String getUserSex() {
-		return this.userSex;
-	}
+    public String getPagebuider() {
+        return this.pagebuider;
+    }
+    
+    public void setPagebuider(String pagebuider) {
+        this.pagebuider = pagebuider;
+    }
 
-	public void setUserSex(String userSex) {
-		this.userSex = userSex;
-	}
+    public String getPageanimation() {
+        return this.pageanimation;
+    }
+    
+    public void setPageanimation(String pageanimation) {
+        this.pageanimation = pageanimation;
+    }
 
-	public Timestamp getBirthday() {
-		return this.birthday;
-	}
+    public String getBstyle() {
+        return this.bstyle;
+    }
+    
+    public void setBstyle(String bstyle) {
+        this.bstyle = bstyle;
+    }
 
-	public void setBirthday(Timestamp birthday) {
-		this.birthday = birthday;
-	}
+    public String getBcolor() {
+        return this.bcolor;
+    }
+    
+    public void setBcolor(String bcolor) {
+        this.bcolor = bcolor;
+    }
 
-	public Timestamp getRegistTime() {
-		return this.registTime;
-	}
+    public Boolean getIsDelete() {
+        return this.isDelete;
+    }
+    
+    public void setIsDelete(Boolean isDelete) {
+        this.isDelete = isDelete;
+    }
 
-	public void setRegistTime(Timestamp registTime) {
-		this.registTime = registTime;
-	}
+    public Integer getSortNumber() {
+        return this.sortNumber;
+    }
+    
+    public void setSortNumber(Integer sortNumber) {
+        this.sortNumber = sortNumber;
+    }
 
-	public String getSignature() {
-		return this.signature;
-	}
+    public Set getUserposts() {
+        return this.userposts;
+    }
+    
+    public void setUserposts(Set userposts) {
+        this.userposts = userposts;
+    }
 
-	public void setSignature(String signature) {
-		this.signature = signature;
-	}
+    public Set getApplyfriendsForApplyUserId() {
+        return this.applyfriendsForApplyUserId;
+    }
+    
+    public void setApplyfriendsForApplyUserId(Set applyfriendsForApplyUserId) {
+        this.applyfriendsForApplyUserId = applyfriendsForApplyUserId;
+    }
 
-	public Integer getLoginNumber() {
-		return this.loginNumber;
-	}
+    public Set getUserrelationsForUserIdB() {
+        return this.userrelationsForUserIdB;
+    }
+    
+    public void setUserrelationsForUserIdB(Set userrelationsForUserIdB) {
+        this.userrelationsForUserIdB = userrelationsForUserIdB;
+    }
 
-	public void setLoginNumber(Integer loginNumber) {
-		this.loginNumber = loginNumber;
-	}
+    public Set getKeywords() {
+        return this.keywords;
+    }
+    
+    public void setKeywords(Set keywords) {
+        this.keywords = keywords;
+    }
 
-	public Timestamp getLoginTime() {
-		return this.loginTime;
-	}
+    public Set getUserrelationsForUserIdA() {
+        return this.userrelationsForUserIdA;
+    }
+    
+    public void setUserrelationsForUserIdA(Set userrelationsForUserIdA) {
+        this.userrelationsForUserIdA = userrelationsForUserIdA;
+    }
 
-	public void setLoginTime(Timestamp loginTime) {
-		this.loginTime = loginTime;
-	}
+    public Set getSyslogs() {
+        return this.syslogs;
+    }
+    
+    public void setSyslogs(Set syslogs) {
+        this.syslogs = syslogs;
+    }
 
-	public String getTheme() {
-		return this.theme;
-	}
+    public Set getAttentions() {
+        return this.attentions;
+    }
+    
+    public void setAttentions(Set attentions) {
+        this.attentions = attentions;
+    }
 
-	public void setTheme(String theme) {
-		this.theme = theme;
-	}
+    public Set getApproves() {
+        return this.approves;
+    }
+    
+    public void setApproves(Set approves) {
+        this.approves = approves;
+    }
 
-	public String getPagebuider() {
-		return this.pagebuider;
-	}
+    public Set getReplies() {
+        return this.replies;
+    }
+    
+    public void setReplies(Set replies) {
+        this.replies = replies;
+    }
 
-	public void setPagebuider(String pagebuider) {
-		this.pagebuider = pagebuider;
-	}
+    public Set getApplyfriendsForRecUserId() {
+        return this.applyfriendsForRecUserId;
+    }
+    
+    public void setApplyfriendsForRecUserId(Set applyfriendsForRecUserId) {
+        this.applyfriendsForRecUserId = applyfriendsForRecUserId;
+    }
+   
 
-	public String getPageanimation() {
-		return this.pageanimation;
-	}
 
-	public void setPageanimation(String pageanimation) {
-		this.pageanimation = pageanimation;
-	}
 
-	public String getBstyle() {
-		return this.bstyle;
-	}
 
-	public void setBstyle(String bstyle) {
-		this.bstyle = bstyle;
-	}
 
-	public String getBcolor() {
-		return this.bcolor;
-	}
 
-	public void setBcolor(String bcolor) {
-		this.bcolor = bcolor;
-	}
 
-	public Boolean getIsDelete() {
-		return this.isDelete;
-	}
-
-	public void setIsDelete(Boolean isDelete) {
-		this.isDelete = isDelete;
-	}
-
-	public Integer getSortNumber() {
-		return this.sortNumber;
-	}
-
-	public void setSortNumber(Integer sortNumber) {
-		this.sortNumber = sortNumber;
-	}
-
-	public Set getUserposts() {
-		return this.userposts;
-	}
-
-	public void setUserposts(Set userposts) {
-		this.userposts = userposts;
-	}
-
-	public Set getApplyfriendsForApplyUserId() {
-		return this.applyfriendsForApplyUserId;
-	}
-
-	public void setApplyfriendsForApplyUserId(Set applyfriendsForApplyUserId) {
-		this.applyfriendsForApplyUserId = applyfriendsForApplyUserId;
-	}
-
-	public Set getUserrelationsForUserIdB() {
-		return this.userrelationsForUserIdB;
-	}
-
-	public void setUserrelationsForUserIdB(Set userrelationsForUserIdB) {
-		this.userrelationsForUserIdB = userrelationsForUserIdB;
-	}
-
-	public Set getKeywords() {
-		return this.keywords;
-	}
-
-	public void setKeywords(Set keywords) {
-		this.keywords = keywords;
-	}
-
-	public Set getUserrelationsForUserIdA() {
-		return this.userrelationsForUserIdA;
-	}
-
-	public void setUserrelationsForUserIdA(Set userrelationsForUserIdA) {
-		this.userrelationsForUserIdA = userrelationsForUserIdA;
-	}
-
-	public Set getSyslogs() {
-		return this.syslogs;
-	}
-
-	public void setSyslogs(Set syslogs) {
-		this.syslogs = syslogs;
-	}
-
-	public Set getReplies() {
-		return this.replies;
-	}
-
-	public void setReplies(Set replies) {
-		this.replies = replies;
-	}
-
-	public Set getApplyfriendsForRecUserId() {
-		return this.applyfriendsForRecUserId;
-	}
-
-	public void setApplyfriendsForRecUserId(Set applyfriendsForRecUserId) {
-		this.applyfriendsForRecUserId = applyfriendsForRecUserId;
-	}
 
 }

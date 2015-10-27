@@ -6,7 +6,7 @@ import com.jsu.ic.base.DaoSupportImpl;
 import com.jsu.ic.dao.RealInfoDAO;
 import com.jsu.ic.po.Realinfo;
 
-@Repository
+@Repository("realInfoDAO")
 public class RealInfoDAOImpl extends DaoSupportImpl<Realinfo> implements RealInfoDAO {
 
 }

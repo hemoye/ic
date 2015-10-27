@@ -45,6 +45,8 @@
 		<mapping resource="com/jsu/ic/po/Postresource.hbm.xml" />
 		<mapping resource="com/jsu/ic/po/Clazz.hbm.xml" />
 		<mapping resource="com/jsu/ic/po/Keyword.hbm.xml" />
+		<mapping resource="com/jsu/ic/po/Approve.hbm.xml" />
+		<mapping resource="com/jsu/ic/po/Attention.hbm.xml" />
 
 
 	</session-factory>

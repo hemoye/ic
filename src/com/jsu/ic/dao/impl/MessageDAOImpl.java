@@ -6,7 +6,7 @@ import com.jsu.ic.base.DaoSupportImpl;
 import com.jsu.ic.dao.MessageDAO;
 import com.jsu.ic.po.Message;
 
-@Repository
+@Repository("messageDAO")
 public class MessageDAOImpl extends DaoSupportImpl<Message> implements MessageDAO {
 
 }

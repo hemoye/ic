@@ -6,7 +6,7 @@ import com.jsu.ic.base.DaoSupportImpl;
 import com.jsu.ic.po.Userrole;
 import com.jsu.ic.service.UserRoleService;
 
-@Service
+@Service(value = "userRoleService")
 public class UserRoleServiceImpl extends DaoSupportImpl<Userrole> implements UserRoleService {
 
 }

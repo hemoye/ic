@@ -6,7 +6,7 @@ import com.jsu.ic.base.DaoSupportImpl;
 import com.jsu.ic.po.Reply;
 import com.jsu.ic.service.ReplyService;
 
-@Service
+@Service("replyService")
 public class ReplyServiceImpl extends DaoSupportImpl<Reply> implements ReplyService {
 
 }

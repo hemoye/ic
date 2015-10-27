@@ -6,7 +6,7 @@ import com.jsu.ic.base.DaoSupportImpl;
 import com.jsu.ic.dao.ClazzDAO;
 import com.jsu.ic.po.Clazz;
 
-@Repository
+@Repository("clazzDAO")
 public class ClazzDAOImpl extends DaoSupportImpl<Clazz> implements ClazzDAO {
 
 }

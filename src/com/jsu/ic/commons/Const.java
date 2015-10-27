@@ -1,6 +1,7 @@
 package com.jsu.ic.commons;
 
-import java.io.InputStreamReader;
+import java.io.File;
+import java.io.FileReader;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Calendar;
@@ -32,7 +33,7 @@ public final class Const {
 	/**
 	 * 测试时，默认登陆的账户账户
 	 */
-	public static Long TEST_USER_ID = 1L;
+	public static Integer TEST_USER_ID = 1;
 
 	/**
 	 * 短URL后缀名
@@ -109,7 +110,7 @@ public final class Const {
 	 */
 	static {
 		try {
-			config.load(new InputStreamReader(Const.class.getClassLoader().getResourceAsStream("config.properties"), "UTF-8"));
+			config.load(new FileReader(new File("G:/Code/GZ/ic/config/jdbc.properties")));
 			for (Field f : Const.class.getDeclaredFields()) {
 				setValue(f, config.getProperty(f.getName()));
 			}

@@ -6,7 +6,7 @@ import com.jsu.ic.base.DaoSupportImpl;
 import com.jsu.ic.dao.ReplyDAO;
 import com.jsu.ic.po.Reply;
 
-@Repository
+@Repository("replyDAO")
 public class ReplyDAOImpl extends DaoSupportImpl<Reply> implements ReplyDAO {
 
 }

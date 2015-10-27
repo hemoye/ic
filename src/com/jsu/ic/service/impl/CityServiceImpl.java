@@ -6,7 +6,7 @@ import com.jsu.ic.base.DaoSupportImpl;
 import com.jsu.ic.po.City;
 import com.jsu.ic.service.CityService;
 
-@Service
-public class CityServiceImpl extends DaoSupportImpl<City> implements CityService{
+@Service(value = "cityService")
+public class CityServiceImpl extends DaoSupportImpl<City> implements CityService {
 
 }

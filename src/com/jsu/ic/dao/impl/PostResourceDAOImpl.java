@@ -6,7 +6,7 @@ import com.jsu.ic.base.DaoSupportImpl;
 import com.jsu.ic.dao.PostResourceDAO;
 import com.jsu.ic.po.Postresource;
 
-@Repository
+@Repository("postResourceDAO")
 public class PostResourceDAOImpl extends DaoSupportImpl<Postresource> implements PostResourceDAO {
 
 }

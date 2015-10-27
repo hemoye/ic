@@ -2,84 +2,103 @@ package com.jsu.ic.po;
 
 import java.sql.Timestamp;
 
+
 /**
  * Head entity. @author MyEclipse Persistence Tools
  */
 
-public class Head implements java.io.Serializable {
+public class Head  implements java.io.Serializable {
 
-	// Fields
 
-	private Integer headId;
-	private String headUrl;
-	private Timestamp addTime;
-	private Timestamp updateTime;
-	private Boolean isDelete;
-	private Integer sortNumber;
+    // Fields    
 
-	// Constructors
+     private Integer headId;
+     private String headUrl;
+     private Timestamp addTime;
+     private Timestamp updateTime;
+     private Boolean isDelete;
+     private Integer sortNumber;
 
-	/** default constructor */
-	public Head() {
-	}
 
-	/** full constructor */
-	public Head(String headUrl, Timestamp addTime, Timestamp updateTime, Boolean isDelete, Integer sortNumber) {
-		this.headUrl = headUrl;
-		this.addTime = addTime;
-		this.updateTime = updateTime;
-		this.isDelete = isDelete;
-		this.sortNumber = sortNumber;
-	}
+    // Constructors
 
-	// Property accessors
+    /** default constructor */
+    public Head() {
+    }
 
-	public Integer getHeadId() {
-		return this.headId;
-	}
+	/** minimal constructor */
+    public Head(String headUrl, Timestamp addTime, Timestamp updateTime) {
+        this.headUrl = headUrl;
+        this.addTime = addTime;
+        this.updateTime = updateTime;
+    }
+    
+    /** full constructor */
+    public Head(String headUrl, Timestamp addTime, Timestamp updateTime, Boolean isDelete, Integer sortNumber) {
+        this.headUrl = headUrl;
+        this.addTime = addTime;
+        this.updateTime = updateTime;
+        this.isDelete = isDelete;
+        this.sortNumber = sortNumber;
+    }
 
-	public void setHeadId(Integer headId) {
-		this.headId = headId;
-	}
+   
+    // Property accessors
 
-	public String getHeadUrl() {
-		return this.headUrl;
-	}
+    public Integer getHeadId() {
+        return this.headId;
+    }
+    
+    public void setHeadId(Integer headId) {
+        this.headId = headId;
+    }
 
-	public void setHeadUrl(String headUrl) {
-		this.headUrl = headUrl;
-	}
+    public String getHeadUrl() {
+        return this.headUrl;
+    }
+    
+    public void setHeadUrl(String headUrl) {
+        this.headUrl = headUrl;
+    }
 
-	public Timestamp getAddTime() {
-		return this.addTime;
-	}
+    public Timestamp getAddTime() {
+        return this.addTime;
+    }
+    
+    public void setAddTime(Timestamp addTime) {
+        this.addTime = addTime;
+    }
 
-	public void setAddTime(Timestamp addTime) {
-		this.addTime = addTime;
-	}
+    public Timestamp getUpdateTime() {
+        return this.updateTime;
+    }
+    
+    public void setUpdateTime(Timestamp updateTime) {
+        this.updateTime = updateTime;
+    }
 
-	public Timestamp getUpdateTime() {
-		return this.updateTime;
-	}
+    public Boolean getIsDelete() {
+        return this.isDelete;
+    }
+    
+    public void setIsDelete(Boolean isDelete) {
+        this.isDelete = isDelete;
+    }
 
-	public void setUpdateTime(Timestamp updateTime) {
-		this.updateTime = updateTime;
-	}
+    public Integer getSortNumber() {
+        return this.sortNumber;
+    }
+    
+    public void setSortNumber(Integer sortNumber) {
+        this.sortNumber = sortNumber;
+    }
+   
 
-	public Boolean getIsDelete() {
-		return this.isDelete;
-	}
 
-	public void setIsDelete(Boolean isDelete) {
-		this.isDelete = isDelete;
-	}
 
-	public Integer getSortNumber() {
-		return this.sortNumber;
-	}
 
-	public void setSortNumber(Integer sortNumber) {
-		this.sortNumber = sortNumber;
-	}
+
+
+
 
 }

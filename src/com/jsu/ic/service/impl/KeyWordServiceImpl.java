@@ -6,7 +6,7 @@ import com.jsu.ic.base.DaoSupportImpl;
 import com.jsu.ic.po.Keyword;
 import com.jsu.ic.service.KeyWordService;
 
-@Service
+@Service("keyWordService")
 public class KeyWordServiceImpl extends DaoSupportImpl<Keyword> implements KeyWordService {
 
 }

@@ -15,16 +15,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jsu.ic.commons.QueryHelper;
 import com.jsu.ic.vo.PageBean;
+
 /**
  * @author 木木
- *
+ * 
  */
 
 @SuppressWarnings("unchecked")
 @Transactional
 public abstract class DaoSupportImpl<T> implements DaoSupport<T> {
 
-	@Resource(name="sessionFactory")
+	@Resource(name = "sessionFactory")
 	private SessionFactory sessionFactory;
 	private Class<T> clazz;
 	protected Logger log;
@@ -34,18 +35,30 @@ public abstract class DaoSupportImpl<T> implements DaoSupport<T> {
 	 */
 	public DaoSupportImpl() {
 		// 1、获取当前new的对象的 泛型的父类 类型
-		ParameterizedType pt = (ParameterizedType) this.getClass().getGenericSuperclass(); 
+		ParameterizedType pt = (ParameterizedType) this.getClass().getGenericSuperclass();
 		// 2、获取第一个类型参数的真实类型
-		this.clazz = (Class<T>) pt.getActualTypeArguments()[0]; 
+		this.clazz = (Class<T>) pt.getActualTypeArguments()[0];
 		log = LoggerFactory.getLogger(this.getClass());
 	}
-	
+
 	/**
 	 * 获取当前可用的session
+	 * 
 	 * @return session
 	 */
 	protected Session getSession() {
 		return sessionFactory.getCurrentSession();
+	}
+
+	public void runSQLString(String sqlString) {
+		log.debug("run sql string: " + sqlString);
+		try {
+			getSession().createSQLQuery(sqlString).executeUpdate();
+			log.debug("run successful");
+		} catch (RuntimeException re) {
+			log.error("run failed", re);
+			throw re;
+		}
 	}
 
 	@Override
@@ -71,7 +84,7 @@ public abstract class DaoSupportImpl<T> implements DaoSupport<T> {
 			throw re;
 		}
 	}
-	
+
 	@Override
 	public void update(T entity) {
 		log.debug("update " + clazz + " instance");
@@ -98,7 +111,7 @@ public abstract class DaoSupportImpl<T> implements DaoSupport<T> {
 			throw re;
 		}
 	}
-	
+
 	@Override
 	public List<T> findByIds(Integer[] ids) {
 		log.debug("getting " + clazz + " instance with ids: " + ids);
@@ -106,10 +119,8 @@ public abstract class DaoSupportImpl<T> implements DaoSupport<T> {
 			if (null == ids || 0 == ids.length) {
 				log.error("get failed" + " the ids is null or the ids.length is zero");
 				return Collections.EMPTY_LIST;
-			}
-			else {
-				return getSession().createQuery(
-						"from " + clazz.getSimpleName() + " where id in (:ids)")
+			} else {
+				return getSession().createQuery("from " + clazz.getSimpleName() + " where id in (:ids)")
 						.setParameterList("ids", ids).list();
 			}
 		} catch (RuntimeException re) {
@@ -120,14 +131,26 @@ public abstract class DaoSupportImpl<T> implements DaoSupport<T> {
 
 	@Override
 	public List<T> findByProperty(String propertyName, Object value) {
-		log.debug("finding " + clazz + " instance with property: " + propertyName
-				+ ", value: " + value);
+		log.debug("finding " + clazz + " instance with property: " + propertyName + ", value: " + value);
 		try {
-			String queryString = "from " + clazz.getSimpleName() + " as model where model."
-					+ propertyName + "= ?";
+			String queryString = "from " + clazz.getSimpleName() + " as model where model." + propertyName + "= ?";
 			Query queryObject = getSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
 			return queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("find by property name failed", re);
+			throw re;
+		}
+	}
+
+	@Override
+	public T findByProperty(String propertyName, String value) {
+		log.debug("finding " + clazz + " instance with property: " + propertyName + ", value: " + value);
+		try {
+			String queryString = "from " + clazz.getSimpleName() + " as model where model." + propertyName + "= ?";
+			Query queryObject = getSession().createQuery(queryString);
+			queryObject.setParameter(0, value);
+			return (T) queryObject.uniqueResult();
 		} catch (RuntimeException re) {
 			log.error("find by property name failed", re);
 			throw re;
@@ -146,7 +169,7 @@ public abstract class DaoSupportImpl<T> implements DaoSupport<T> {
 			throw re;
 		}
 	}
-	
+
 	@SuppressWarnings("rawtypes")
 	public PageBean getPageBean(int pageNum, int pageSize, QueryHelper queryHelper) {
 		// 参数列表

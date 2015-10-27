@@ -6,7 +6,7 @@ import com.jsu.ic.base.DaoSupportImpl;
 import com.jsu.ic.dao.HeadDAO;
 import com.jsu.ic.po.Head;
 
-@Repository
+@Repository("headDAO")
 public class HeadDAOImpl extends DaoSupportImpl<Head> implements HeadDAO {
 
 }

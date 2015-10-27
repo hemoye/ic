@@ -6,7 +6,7 @@ import com.jsu.ic.base.DaoSupportImpl;
 import com.jsu.ic.po.Province;
 import com.jsu.ic.service.ProvinceService;
 
-@Service
+@Service("provinceService")
 public class ProvinceServiceImpl extends DaoSupportImpl<Province> implements ProvinceService {
 
 }

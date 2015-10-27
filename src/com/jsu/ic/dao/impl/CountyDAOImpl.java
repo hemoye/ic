@@ -6,7 +6,7 @@ import com.jsu.ic.base.DaoSupportImpl;
 import com.jsu.ic.dao.CountyDAO;
 import com.jsu.ic.po.County;
 
-@Repository
+@Repository("countyDAO")
 public class CountyDAOImpl extends DaoSupportImpl<County> implements CountyDAO {
 
 }

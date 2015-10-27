@@ -6,7 +6,7 @@ import com.jsu.ic.base.DaoSupportImpl;
 import com.jsu.ic.dao.UserRelationDAO;
 import com.jsu.ic.po.Userrelation;
 
-@Repository
+@Repository("userRelationDAO")
 public class UserRelationDAOImpl extends DaoSupportImpl<Userrelation> implements UserRelationDAO {
 
 }

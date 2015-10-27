@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<offices>
+	<office>
+		<name>页面重构师</name>
+	</office>
+	<office>
+		<name>交互设计师</name>
+	</office>
+	<office>
+		<name>产品经理</name>
+	</office>
+	<office>
+		<name>UI设计师</name>
+	</office>
+	<office>
+		<name>JS工程师</name>
+	</office>
+	<office>
+		<name>Web前端工程师</name>
+	</office>
+	<office>
+		<name>移动开发工程师</name>
+	</office>
+	<office>
+		<name>PHP开发工程师</name>
+	</office>
+	<office>
+		<name>软件测试工程师</name>
+	</office>
+	<office>
+		<name>Linux系统工程师</name>
+	</office>
+	<office>
+		<name>JAVA开发工程师</name>
+	</office>
+	<office>
+		<name>学生</name>
+	</office>
+	<office>
+		<name>其他</name>
+	</office>
+</offices>

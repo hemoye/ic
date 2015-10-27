@@ -4,104 +4,113 @@ import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
+
 /**
  * Useroffice entity. @author MyEclipse Persistence Tools
  */
 
-public class Useroffice implements java.io.Serializable {
+public class Useroffice  implements java.io.Serializable {
 
-	// Fields
 
-	private Integer officeId;
-	private String officeName;
-	private Timestamp addTime;
-	private Timestamp updateTime;
-	private Boolean isDelete;
-	private Integer sortNumber;
-	private Set userinfos = new HashSet(0);
+    // Fields    
 
-	// Constructors
+     private Integer officeId;
+     private String officeName;
+     private Timestamp addTime;
+     private Timestamp updateTime;
+     private Boolean isDelete;
+     private Integer sortNumber;
+     private Set userinfos = new HashSet(0);
 
-	/** default constructor */
-	public Useroffice() {
-	}
+
+    // Constructors
+
+    /** default constructor */
+    public Useroffice() {
+    }
 
 	/** minimal constructor */
-	public Useroffice(String officeName, Timestamp addTime, Timestamp updateTime, Boolean isDelete, Integer sortNumber) {
-		this.officeName = officeName;
-		this.addTime = addTime;
-		this.updateTime = updateTime;
-		this.isDelete = isDelete;
-		this.sortNumber = sortNumber;
-	}
+    public Useroffice(String officeName, Timestamp addTime, Timestamp updateTime) {
+        this.officeName = officeName;
+        this.addTime = addTime;
+        this.updateTime = updateTime;
+    }
+    
+    /** full constructor */
+    public Useroffice(String officeName, Timestamp addTime, Timestamp updateTime, Boolean isDelete, Integer sortNumber, Set userinfos) {
+        this.officeName = officeName;
+        this.addTime = addTime;
+        this.updateTime = updateTime;
+        this.isDelete = isDelete;
+        this.sortNumber = sortNumber;
+        this.userinfos = userinfos;
+    }
 
-	/** full constructor */
-	public Useroffice(String officeName, Timestamp addTime, Timestamp updateTime, Boolean isDelete, Integer sortNumber,
-			Set userinfos) {
-		this.officeName = officeName;
-		this.addTime = addTime;
-		this.updateTime = updateTime;
-		this.isDelete = isDelete;
-		this.sortNumber = sortNumber;
-		this.userinfos = userinfos;
-	}
+   
+    // Property accessors
 
-	// Property accessors
+    public Integer getOfficeId() {
+        return this.officeId;
+    }
+    
+    public void setOfficeId(Integer officeId) {
+        this.officeId = officeId;
+    }
 
-	public Integer getOfficeId() {
-		return this.officeId;
-	}
+    public String getOfficeName() {
+        return this.officeName;
+    }
+    
+    public void setOfficeName(String officeName) {
+        this.officeName = officeName;
+    }
 
-	public void setOfficeId(Integer officeId) {
-		this.officeId = officeId;
-	}
+    public Timestamp getAddTime() {
+        return this.addTime;
+    }
+    
+    public void setAddTime(Timestamp addTime) {
+        this.addTime = addTime;
+    }
 
-	public String getOfficeName() {
-		return this.officeName;
-	}
+    public Timestamp getUpdateTime() {
+        return this.updateTime;
+    }
+    
+    public void setUpdateTime(Timestamp updateTime) {
+        this.updateTime = updateTime;
+    }
 
-	public void setOfficeName(String officeName) {
-		this.officeName = officeName;
-	}
+    public Boolean getIsDelete() {
+        return this.isDelete;
+    }
+    
+    public void setIsDelete(Boolean isDelete) {
+        this.isDelete = isDelete;
+    }
 
-	public Timestamp getAddTime() {
-		return this.addTime;
-	}
+    public Integer getSortNumber() {
+        return this.sortNumber;
+    }
+    
+    public void setSortNumber(Integer sortNumber) {
+        this.sortNumber = sortNumber;
+    }
 
-	public void setAddTime(Timestamp addTime) {
-		this.addTime = addTime;
-	}
+    public Set getUserinfos() {
+        return this.userinfos;
+    }
+    
+    public void setUserinfos(Set userinfos) {
+        this.userinfos = userinfos;
+    }
+   
 
-	public Timestamp getUpdateTime() {
-		return this.updateTime;
-	}
 
-	public void setUpdateTime(Timestamp updateTime) {
-		this.updateTime = updateTime;
-	}
 
-	public Boolean getIsDelete() {
-		return this.isDelete;
-	}
 
-	public void setIsDelete(Boolean isDelete) {
-		this.isDelete = isDelete;
-	}
 
-	public Integer getSortNumber() {
-		return this.sortNumber;
-	}
 
-	public void setSortNumber(Integer sortNumber) {
-		this.sortNumber = sortNumber;
-	}
 
-	public Set getUserinfos() {
-		return this.userinfos;
-	}
-
-	public void setUserinfos(Set userinfos) {
-		this.userinfos = userinfos;
-	}
 
 }

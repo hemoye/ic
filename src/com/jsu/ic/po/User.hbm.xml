@@ -38,10 +38,10 @@
             <column name="status" />
         </property>
         <property name="isDelete" type="java.lang.Boolean">
-            <column name="isDelete" not-null="true" />
+            <column name="isDelete" />
         </property>
         <property name="sortNumber" type="java.lang.Integer">
-            <column name="sortNumber" not-null="true" />
+            <column name="sortNumber" />
         </property>
         <set name="messagesForUserIdB" inverse="true">
             <key>
