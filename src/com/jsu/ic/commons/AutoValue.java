@@ -20,7 +20,6 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.jsu.ic.po.Head;
 import com.jsu.ic.po.Posttype;
@@ -53,14 +52,12 @@ public class AutoValue implements ServletContextListener {
 
 	@Override
 	public void contextDestroyed(ServletContextEvent sce) {
-		
+
 	}
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-		context = WebApplicationContextUtils.getWebApplicationContext(sce.getServletContext());
 		initData(sce);
-		sce.getServletContext().setAttribute(Const.LOGIN_USER_SESSION_KEY, new User(Const.TEST_USER_ID));
 	}
 
 	@SuppressWarnings("unchecked")

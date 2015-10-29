@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>爱智网后台 - 首页</title>
+    <title>旧城微语后台 - 首页</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -25,8 +25,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="<%=basePath%>backstage/css/admin/my.css" />
     <script src="<%=basePath%>backstage/js/jquery-1.10.2.min.js"></script>
     <script src="<%=basePath%>backstage/js/bootstrap.min.js"></script>
-    <script src="<%=basePath%>backstage/js/admin/admin-index.js"></script>
-
+    <script src="<%=basePath%>backstage/js/back.js"></script>
+	<link rel="shortcut icon" type="image/x-icon" href="<%=basePath%>/frontstage/img/1.ico" />
   </head>
   
   <body>
@@ -35,179 +35,86 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<div class="row">
     		<div id="sidebar" class="col-lg-2 col-md-2">
 				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-				  <div class="panel panel-default">
-				    <div class="panel-heading" role="tab" id="noHeadingOne">
-				      <h4 class="panel-title">
-				        <a data-toggle="collapse" data-parent="#accordion" href="#noOne" aria-expanded="true" aria-controls="noOne">
-				          	<a href="javascript:void(0)"><span class="fa fa-home"></span>&nbsp;首页</a>
-				        </a>
-				      </h4>
-				    </div>					    
-				  </div>
-				  <div class="panel panel-default">
-				    <div class="panel-heading" role="tab" id="headingTwo">
-				      <h4 class="panel-title">
-				        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-				          	<span class="fa fa-user"></span>&nbsp;用户管理<span class="fa fa-angle-right pull-right"></span>
-				        </a>
-				      </h4>
-				    </div>
-				    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-				      <div class="panel-body">
-				        <ul class="nav navbar-default nav-stacked">
-						  <li role="presentation"><a href="manage/user/userUI.action"><span class="fa fa-check"></span>&nbsp;检索用户<span class="fa fa-star pull-right" style="color: #ffbe40;margin-top: 2px;"></span></a></li>
-						  <li role="presentation"><a href="manage/frost/frostUI.action"><span class="fa fa-user-times"></span>&nbsp;冻结用户</a></li>
-						</ul>
-				      </div>
-				    </div>
-				  </div>
-				  <div class="panel panel-default">
-				    <div class="panel-heading" role="tab" id="headingThree">
-				      <h4 class="panel-title">
-				        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-				          	<span class="fa fa-video-camera"></span>&nbsp;视频管理<span class="fa fa-angle-right pull-right"></span>
-				        </a>
-				      </h4>
-				    </div>
-				    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-				      <div class="panel-body">
-				        <ul class="nav navbar-default nav-stacked">
-						  <li role="presentation"><a href="manage/course/courseindex.action"><span class="fa fa-bell-o"></span>&nbsp;开设课程</a></li>
-						  <li role="presentation"><a href="manage/voide/voidevoide.action"><span class="fa fa-upload"></span>&nbsp;上传课程</a></li>
-						</ul>
-				      </div>
-				    </div>
-				  </div>
-				  <div class="panel panel-default">
+					<c:forEach items="${msg.powers }" var="power">
+					  <div class="panel panel-default">
 					    <div class="panel-heading" role="tab" id="noHeadingThree">
 					      <h4 class="panel-title">
-					        <a href="manage/report/reportUI.action">
-					          	<span class="fa fa-comment-o"></span>&nbsp;问答管理
-					        </a>
+					      	<c:if test="${empty power.powers }">
+								<a href="${power.powerUrl }">
+						          	<span class="${power.icon }"></span>&nbsp;${power.powerName }
+						        </a>					      	
+					      	</c:if>
+					      	<c:if test="${not empty power.powers }">
+						      	<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapsePower" aria-expanded="false" aria-controls="collapsePower">
+						          	<span class="${power.icon }"></span>&nbsp;${power.powerName }<span class="fa fa-angle-right pull-right"></span>
+						        </a>
+						        <div id="collapsePower" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+							      <div class="panel-body">
+							        <ul class="nav navbar-default nav-stacked">
+									  <li role="presentation"><a href="${power.powerUrl }"><span class="${power.icon }"></span>&nbsp;${power.powerName }</a></li>
+									  <c:forEach items="${power.powers }" var="child">
+									  	<li role="presentation"><a href="${child.powerUrl }"><span class="${child.icon }"></span>&nbsp;${child.powerName }</a></li>
+									  </c:forEach>
+									</ul>
+							      </div>
+							    </div>
+					      	</c:if>
 					      </h4>
 					    </div>					    
-				  </div>
-				  <div class="panel panel-default">
-					    <div class="panel-heading" role="tab" id="noHeadingFour">
-					      <h4 class="panel-title">
-					        <a href="manage/filter/filterUI.action">
-					          	<span class="fa fa-filter"></span>&nbsp;脏话管理
-					        </a>
-					      </h4>
-					    </div>					    
-				  </div>
-				  <div class="panel panel-default">
-					    <div class="panel-heading" role="tab" id="noHeadingFive">
-					      <h4 class="panel-title">
-					        <a href="manage/title/titleUI.action">
-					          	<span class="fa fa-child" style="color: #00A0E9;"></span>&nbsp;称号管理
-					        </a>
-					      </h4>
-					    </div>
-				  </div>
-				  <div class="panel panel-default">
-				    <div class="panel-heading" role="tab" id="noHeadingSix">
-				      <h4 class="panel-title">
-				        <a href="manage/head/headUI.action">
-				          	<span class="fa fa-file-image-o "></span>&nbsp;系统头像
-				        </a>
-				      </h4>
-				    </div>
-				  </div>
-				  <div class="panel panel-default">
-				    <div class="panel-heading" role="tab" id="noHeadingSix">
-				      <h4 class="panel-title">
-				        <a href="manage/feedback/feedbackUI.action">
-				          	<span class="fa fa-bomb" style="color: red;"></span>&nbsp;意见反馈
-				        </a>
-				      </h4>
-				    </div>
-				  </div>
-				 <div class="panel panel-default">
-				    <div class="panel-heading" role="tab" id="noHeadingSix">
-				      <h4 class="panel-title">
-				        <a href="manage/coursetype/typeUI.action">
-				          	<span class="fa fa-bars"></span>&nbsp;课程类型管理
-				        </a>
-				      </h4>
-				    </div>					    
-				  </div>
-				 <!-- <div class="list-group">
-					  <a href="#" class="list-group-item">
-					    <h4 class="list-group-item-heading"><span class="fa fa-bookmark"></span>&nbsp;公告</h4>
-					    <p class="list-group-item-text">时光静好，与君语；细水流年，与君同。—— More Dream</p>
-					  </a>
-					  <a href="#" class="list-group-item">
-					    <h4 class="list-group-item-heading"><span class="fa fa-tag"></span>&nbsp;Tag</h4>
-					    <p class="list-group-item-text">Welcome to the More Dream!</p>
-					  </a>
-					</div> -->
+					  </div>
+				  	</c:forEach>
 				</div>											
 			</div>
 			<div id="content" class="col-lg-10 col-md-10">
 				<!-- nav breadcrumb start -->
 				<ol class="breadcrumb">
 				  <li><a href="javascript:void(0)"><span class="fa fa-home"></span>&nbsp;开始</a></li>
-				  <li class="active">后台首页</li>
+				  <li class="active">系统设置</li>
 				</ol>
 				<!-- nav breadcrumb end -->
-				<!-- 
 				<div class="row list-info">
 					<div class="col-lg-3 col-sm-3 col-xs-12 text-center">
-						<span class="fa fa-file-text fa-2x"></span>
-						<a href="#" class="text-success">
-							<br>新增页面<br>2300
+						<span class="fa fa-users fa-2x"></span>
+						<a href="javascript:void(0)" class="text-success">
+							<br>新增用户<br>${msg.userNumber }
 						</a>
 					</div>
 					<div class="col-lg-3 col-sm-3 col-xs-12 text-center">
-						<span class="fa fa-briefcase fa-2x"></span>
-						<a href="#" class="text-warning" style="color: #f37b1d;">
-							<br>成交订单<br>308
+						<span class="fa fa-home fa-2x"></span>
+						<a href="javascript:void(0)" class="text-warning" style="color: #f37b1d;">
+							<br>新增学校<br>${msg.schoolNumber }
 						</a>
 					</div>
 					<div class="col-lg-3 col-sm-3 col-xs-12 text-center">
 						<span class="fa fa-recycle fa-2x"></span>
-						<a href="#" class="text-danger">
-							<br>昨日访问<br>80082
+						<a href="javascript:void(0)" class="text-danger">
+							<br>昨日访问<br>${msg.visitNumber }
 						</a>
 					</div>
 					<div class="col-lg-3 col-sm-3 col-xs-12 text-center">
 						<span class="fa fa-user-md fa-2x"></span>
-						<a href="#" class="text-primary">
-							<br>在线用户<br>3000
+						<a href="javascript:void(0)" class="text-primary">
+							<br>在线用户<br>${msg.onlineNumber }
 						</a>
 					</div>
 				</div>
-				 -->
 				
 				<div class="row">
 					<div class="col-md-3 col-xs-12">
 						<div class="panel panel-default">
 							<div class="panel-body text-center">
-								<img src="${model.adminHead }" class="img-responsive" style="display: inline;" />
+								<img src="${model.userHead }" class="img-responsive" style="display: inline;" />
 							</div>
 							<div class="panel-heading">
-								您好，${model.adminName } <!-- 这是您第8次登录，上次登录为&nbsp;<time>2014-10-1</time>。 -->
+								您好，${model.userName } <!-- 这是您第8次登录，上次登录为&nbsp;<time>2014-10-1</time>。 -->
 							</div>
 						</div>
 					</div>
 					<div class="col-md-9 col-xs-12">
-						<c:if test="${model.feedNumber > 0 }">
-							<div class="alert alert-yellow">
-								<span class="fa fa-close pull-right" onclick="this.parentNode.style.display='none';"></span>
-								<strong>注意：</strong>您有${model.feedNumber }条未读信息，<a href="manage/feedback/feedbackUI.action">点击查看</a>。
-							</div>
-						</c:if>
-						<!-- 
-						<div class="panel panel-default">
-							<div class="panel-heading">多梦网络主题介绍</div>
-							<div class="panel-body">
-								<p>多梦网络提供了各种灵活模块</p>
-								<a class="btn btn-yellow"><span class="fa fa-code"></span>&nbsp;下载使用教程</a>
-								<a class="btn btn-white"><span class="fa fa-file"></span>&nbsp;查看使用教程</a>
-							</div>
+						<div class="alert alert-yellow">
+							<span class="fa fa-close pull-right" onclick="this.parentNode.style.display='none';"></span>
+							<strong>注意：</strong>您有1条未读信息，<a href="manage/feedback/feedbackUI.action">点击查看</a>。
 						</div>
-						 -->
 					</div>
 				</div>
 				
@@ -217,11 +124,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="panel-heading">站点统计</div>
 							<div class="panel-body">
 								<ul class="list-group">
-				                	<li class="list-group-item"><span class="pull-right badge progress-bar-danger">${userNumber }</span><span class="fa fa-user"></span> 会员</li>
-				                	<li class="list-group-item"><span class="pull-right badge btn-white">${teacherNumber }</span><span class="fa fa-user-secret"></span> 教师</li>
-				                    <li class="list-group-item"><span class="pull-right badge btn-white">${courseNumber }</span><span class="fa fa-cloud"></span> 课程</li>
-				                    <li class="list-group-item"><span class="pull-right badge btn-white">${voideNumber }</span><span class="fa fa-video-camera"></span> 视频</li>
-				                    <li class="list-group-item"><span class="pull-right badge btn-white">${resourceNumber }</span><span class="fa fa-file-zip-o"></span> 资源</li>
+				                	<li class="list-group-item"><span class="pull-right badge progress-bar-danger">${msg.users }</span><span class="fa fa-user"></span> 会员</li>
+				                	<li class="list-group-item"><span class="pull-right badge btn-white">${msg.schools }</span><span class="fa fa-user-secret"></span> 院校</li>
+				                    <li class="list-group-item"><span class="pull-right badge btn-white">${msg.posts }</span><span class="fa-file"></span> 帖子</li>
+				                    <li class="list-group-item"><span class="pull-right badge btn-white">${msg.resources }</span><span class="fa fa-cloud"></span> 资源</li>
 				                </ul>
 							</div>
 						</div>
@@ -234,10 +140,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<table class="table">
 										<tbody>
 											<tr><th colspan="2">服务器信息</th><th colspan="2">系统信息</th></tr>
-						                    <tr><td width="110" align="right">操作系统：</td><td>centos 6.5</td><td width="90" align="right">系统开发：</td><td><a href="javascript:void(0)" >爱智网</a></td></tr>
-						                    <tr><td align="right">Web服务器：</td><td>Tomcat + Apache</td><td align="right">主页：</td><td><a href="index.action" target="_blank">点击这里</a></td></tr>
+						                    <tr><td width="110" align="right">操作系统：</td><td>centos 6.5</td><td width="100" align="right">系统开发：</td><td><a href="javascript:void(0)" >旧城微雨</a></td></tr>
+						                    <tr><td align="right">Web服务器：</td><td>Tomcat + Apache</td><td align="right">主页：</td><td><a href="manage/index.html" target="_blank">点击这里</a></td></tr>
 						                    <tr><td align="right">程序语言：</td><td>Java</td><td align="right">邮箱：</td><td><a href="javascript:void(0)" >a491158129@163.com</a></td></tr>
-						                    <tr><td align="right">数据库：</td><td>MySQL</td><td align="right">qq：</td><td>380560757<a href="javascript:void(0)" >(点击加入)</a> </td></tr>
+						                    <tr><td align="right">数据库：</td><td>MySQL</td><td align="right">qq：</td><td>123456789<a href="javascript:void(0)" >(点击加入)</a> </td></tr>
 						                </tbody>
 									</table>
 								</ul>

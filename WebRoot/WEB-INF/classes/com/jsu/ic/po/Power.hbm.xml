@@ -40,7 +40,7 @@
         <property name="sortNumber" type="java.lang.Integer">
             <column name="sortNumber" />
         </property>
-        <set name="powers" inverse="true">
+        <set name="powers" inverse="true" lazy="false" order-by="powerId">
             <key>
                 <column name="fatherId" />
             </key>

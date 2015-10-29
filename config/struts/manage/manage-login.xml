@@ -4,11 +4,10 @@
 	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
 <struts>
 	
-	<!-- 测试Struts2是否配置成功 -->
-	<package name="login" namespace="/manage" extends="struts-default">
+	<package name="login" namespace="/manage" extends="my-default">
 		<action name="login_*" class="loginAction" method="{1}">
 			<result name="loginUI">/WEB-INF/backstage/login.jsp</result>
-			<result name="login">/WEB-INF/backstage/index.jsp</result>
+			<result name="login" type="redirect">index.html</result>
 		</action>
 	</package>
 

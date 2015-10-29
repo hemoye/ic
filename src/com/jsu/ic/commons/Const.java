@@ -2,13 +2,18 @@ package com.jsu.ic.commons;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
+
+import com.jsu.ic.po.User;
 
 /**
  * 常量公共类<br/>
@@ -23,12 +28,27 @@ public final class Const {
 	/**
 	 * 登陆用户的SESSION KEY
 	 */
-	public static String LOGIN_USER_SESSION_KEY = "LOGIN_USER_SESSION_KEY";
+	public static final String LOGIN_USER_SESSION_KEY = "LOGIN_USER_SESSION_KEY";
+
+	/**
+	 * 消息字段的KEY
+	 */
+	public static final String MESSAGE_KEY = "msg";
+
+	/**
+	 * 记录在线用户
+	 */
+	public static List<User> loginUsers = new ArrayList<User>();
 
 	/**
 	 * 配置文件对象
 	 */
 	public static final Properties config = new Properties();
+
+	/**
+	 * 消息文件对象
+	 */
+	public static final Properties messageConfig = new Properties();
 
 	/**
 	 * 测试时，默认登陆的账户账户
@@ -49,6 +69,16 @@ public final class Const {
 	 * 模块名称的检测正则 $1 //有待改进
 	 */
 	public static String MODULE_REGX = "^/manage/(.+)$";
+
+	/**
+	 * 登录控制
+	 */
+	public static String LOGIN_BASE_URI_REGX = "^(/manage)(/.+)?$";
+
+	/**
+	 * 一天的毫秒值
+	 */
+	public static Long day = 24 * 60 * 60 * 1000L;
 
 	/**
 	 * 文件保存根目录<br/>
@@ -104,6 +134,10 @@ public final class Const {
 	public final static Calendar getCalendar() {
 		return Calendar.getInstance();
 	}
+	
+	public final static String dateToString(Object date) {
+		return DateConvert.datetoString(date);
+	}
 
 	/**
 	 * 从配置文件中装置常量的值
@@ -111,6 +145,8 @@ public final class Const {
 	static {
 		try {
 			config.load(new FileReader(new File("G:/Code/GZ/ic/config/jdbc.properties")));
+			messageConfig.load(new InputStreamReader(Const.class.getClassLoader().getResourceAsStream("message.properties"),
+					"UTF-8"));
 			for (Field f : Const.class.getDeclaredFields()) {
 				setValue(f, config.getProperty(f.getName()));
 			}
@@ -142,6 +178,17 @@ public final class Const {
 		} catch (Exception e) {
 			Logger.getLogger(Const.class).warn("未能装载常量：" + f.getName() + ",希望装载：" + value, e);
 		}
+	}
+
+	/**
+	 * 根据消息码获取消息内容
+	 * 
+	 * @param code
+	 *            消息码
+	 * @return 消息内容
+	 */
+	public static String getMessage(String code) {
+		return messageConfig.getProperty(code);
 	}
 
 }

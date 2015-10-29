@@ -12,7 +12,7 @@
 	</power>
 	<power>
 		<name>院校管理</name>
-		<url>manage/log/index.html</url>
+		<url>manage/school/index.html</url>
 		<father>0</father>
 	</power>
 	<power>

@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.jsu.ic.commons.Const;
 import com.jsu.ic.po.User;
 import com.jsu.ic.po.Userinfo;
 import com.jsu.ic.service.UserInfoService;
@@ -37,6 +38,16 @@ public class UserInfoServiceTest {
 		entity.setSortNumber(0);
 		entity.setLoginNumber(0);
 		service.save(entity);
+	}
+
+	/**
+	 * 测试获取某一时间段内的注册用户
+	 */
+	@Test
+	public void testFindByDate() {
+		Date endTime = Const.getDate();
+		Date beginTime = new Date(endTime.getTime() - 1000 * 24 * 60 * 60);
+		System.out.println(service.findByDate(beginTime, endTime).size());
 	}
 
 }

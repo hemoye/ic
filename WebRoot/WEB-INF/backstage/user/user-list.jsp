@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -8,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<head>
 		<base href="<%=basePath%>">
 		<meta charset="utf-8">
-		<title>爱智网后台管理 - 用户管理</title>
+		<title>旧城微语后台 - 用户管理</title>
 		<link href="<%=basePath%>backstage/css/bootstrap.min.css" rel="stylesheet">       
 	    <link rel="stylesheet" href="<%=basePath%>backstage/css/font-awesome.min.css">
 	    <link rel="stylesheet" href="<%=basePath%>backstage/css/bootstrap-datetimepicker.min.css" />
@@ -16,10 +17,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <link rel="stylesheet" href="<%=basePath%>backstage/css/admin/admin-user-ban.css" />
 	    <script src="<%=basePath%>backstage/js/jquery-1.10.2.min.js"></script>
 	    <script src="<%=basePath%>backstage/js/bootstrap.min.js"></script>
-	    <script src="<%=basePath%>backstage/js/admin/admin-index.js"></script>
+	    <script src="<%=basePath%>backstage/js/back.js"></script>
 	    <script src="<%=basePath%>backstage/js/user/user.js"></script>
 	    <script type="text/javascript" src="<%=basePath%>backstage/js/moment.min.js" ></script>
 	    <script type="text/javascript" src="<%=basePath%>backstage/js/bootstrap-datetimepicker.min.js" ></script>
+	    <link rel="shortcut icon" type="image/x-icon" href="<%=basePath%>/frontstage/img/1.ico" />
 	</head>
 	<body>
 		<jsp:include page="../nav.jsp"></jsp:include>		
@@ -27,105 +29,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="row">
 				<div id="sidebar" class="col-lg-2 col-md-2">
 					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-					  <div class="panel panel-default">
-					    <div class="panel-heading" role="tab" id="noHeadingOne">
-					      <h4 class="panel-title">
-					        <a data-toggle="collapse" data-parent="#accordion" href="#noOne" aria-expanded="true" aria-controls="noOne">
-					          	<a href="manage/admin/adminindex.action"><span class="fa fa-home"></span>&nbsp;首页</a>
-					        </a>
-					      </h4>
-					    </div>					    
-					  </div>
-					  <div class="panel panel-default">
-					    <div class="panel-heading" role="tab" id="headingTwo">
-					      <h4 class="panel-title">
-					        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-					          	<span class="fa fa-user"></span>&nbsp;用户管理<span class="fa fa-angle-right pull-right"></span>
-					        </a>
-					      </h4>
-					    </div>
-					    <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
-					      <div class="panel-body">
-					        <ul class="nav navbar-default nav-stacked">
-							  <li role="presentation"><a href="javascript:void(0)"><span class="fa fa-check"></span>&nbsp;检索用户<span class="fa fa-star pull-right" style="color: #ffbe40;margin-top: 2px;"></span></a></li>
-							  <li role="presentation"><a href="manage/frost/frostUI.action"><span class="fa fa-user-times"></span>&nbsp;冻结用户</a></li>
-							</ul>
-					      </div>
-					    </div>
-					  </div>
-					  <div class="panel panel-default">
-					    <div class="panel-heading" role="tab" id="headingThree">
-					      <h4 class="panel-title">
-					        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-					          	<span class="fa fa-video-camera"></span>&nbsp;视频管理<span class="fa fa-angle-right pull-right"></span>
-					        </a>
-					      </h4>
-					    </div>
-					    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-					      <div class="panel-body">
-					        <ul class="nav navbar-default nav-stacked">
-							  <li role="presentation"><a href="manage/course/courseindex.action"><span class="fa fa-bell-o"></span>&nbsp;开设课程</a></li>
-							  <li role="presentation"><a href="manage/voide/voidevoide.action"><span class="fa fa-upload"></span>&nbsp;上传课程</a></li>
-							</ul>
-					      </div>
-					    </div>
-					  </div>
-					  <div class="panel panel-default">
+						<c:forEach items="${msg.powers }" var="power">
+						  <div class="panel panel-default">
 						    <div class="panel-heading" role="tab" id="noHeadingThree">
 						      <h4 class="panel-title">
-						        <a href="manage/report/reportUI.action">
-						          	<span class="fa fa-comment-o"></span>&nbsp;问答管理
-						        </a>
+						      	<c:if test="${empty power.powers }">
+									<a href="${power.powerUrl }">
+							          	<span class="${power.icon }"></span>&nbsp;${power.powerName }
+							        </a>					      	
+						      	</c:if>
+						      	<c:if test="${not empty power.powers }">
+							      	<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapsePower" aria-expanded="false" aria-controls="collapsePower">
+							          	<span class="${power.icon }"></span>&nbsp;${power.powerName }<span class="fa fa-angle-right pull-right"></span>
+							        </a>
+							        <div id="collapsePower" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+								      <div class="panel-body">
+								        <ul class="nav navbar-default nav-stacked">
+										  <li role="presentation"><a href="${power.powerUrl }"><span class="${power.icon }"></span>&nbsp;${power.powerName }</a></li>
+										  <c:forEach items="${power.powers }" var="child">
+										  	<li role="presentation"><a href="${child.powerUrl }"><span class="${child.icon }"></span>&nbsp;${child.powerName }</a></li>
+										  </c:forEach>
+										</ul>
+								      </div>
+								    </div>
+						      	</c:if>
 						      </h4>
 						    </div>					    
-					  </div>
-					  <div class="panel panel-default">
-						    <div class="panel-heading" role="tab" id="noHeadingFour">
-						      <h4 class="panel-title">
-						        <a href="manage/filter/filterUI.action">
-						          	<span class="fa fa-filter"></span>&nbsp;脏话管理
-						        </a>
-						      </h4>
-						    </div>					    
-					  </div>
-					  <div class="panel panel-default">
-						    <div class="panel-heading" role="tab" id="noHeadingFive">
-						      <h4 class="panel-title">
-						        <a href="manage/title/titleUI.action">
-						          	<span class="fa fa-child" style="color: #00A0E9;"></span>&nbsp;称号管理
-						        </a>
-						      </h4>
-						    </div>					    
-					  </div>
-					  <div class="panel panel-default">
-					    <div class="panel-heading" role="tab" id="noHeadingSix">
-					      <h4 class="panel-title">
-					        <a href="manage/head/headUI.action">
-					          	<span class="fa fa-file-image-o "></span>&nbsp;系统头像
-					        </a>
-					      </h4>
-					    </div>
-					  </div>
-					  <div class="panel panel-default">
-					    <div class="panel-heading" role="tab" id="noHeadingSix">
-					      <h4 class="panel-title">
-					        <a href="manage/feedback/feedbackUI.action">
-					          	<span class="fa fa-bomb" style="color: red;"></span>&nbsp;意见反馈
-					        </a>
-					      </h4>
-					    </div>					    
-					  </div>
-					 <div class="panel panel-default">
-					    <div class="panel-heading" role="tab" id="noHeadingSix">
-					      <h4 class="panel-title">
-					        <a href="manage/coursetype/typeUI.action">
-					          	<span class="fa fa-bars"></span>&nbsp;课程类型管理
-					        </a>
-					      </h4>
-					    </div>					    
-					  </div>
-				</div>											
-			</div>
+						  </div>
+					  	</c:forEach>
+					</div>											
+				</div>
 				<div id="content" class="col-lg-10 col-md-10">
 					<!-- nav breadcrumb start -->
 					<ol class="breadcrumb">
@@ -139,13 +72,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="panel-body">
 								<div class="btn-group form-inline" role="group">
 									<input type="button" class="button button-small checkall" name="checkall" checkfor="id" value="全选">
-									<input type="button" class="button button-small border-yellow" onclick="deleteByIds()" value="批量冻结">
 									<div class="input-group pull-right">
-									  <select name="status" id="userStatus" onchange="changeSelect()" class="form-control pull-right">
-							    		<option value="-1">所有用户</option>
-							    		<option value="1">已激活用户</option>
-							    		<option value="0">未激活用户</option>
-							    		<option value="2">冻结用户</option>
+									  <select name="roleId" id="roleId" onchange="javascript:selectChange()" class="form-control pull-right">
+							    		<option value="0">所有用户</option>
+							    		<option value="1">超级管理员</option>
+							    		<option value="2">院级管理员</option>
+							    		<option value="3">校级管理员</option>
+							    		<option value="4">班级管理员</option>
+							    		<option value="5">班级管理员</option>
+									  </select>
+									  <span class="input-group-addon">
+				                      </span>
+									  <select name="pageSize" id="pageSize" onchange="javascript:selectChange()" class="form-control pull-right">
+							    		<option value="10">每页10条</option>
+							    		<option value="5">每页5条</option>
+							    		<option value="20">每页20条</option>
+							    		<option value="500">每页50条</option>
 									  </select>
 									  <span class="input-group-addon">
 				                      </span>
@@ -157,10 +99,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				                      <span class="input-group-addon">
 				                          <span class="glyphicon glyphicon-time"></span>
 				                      </span>
-				                      <form action="javascript:changeSelect()">
+				                      <form action="javascript:selectChange()">
 										<div class="input-group pull-right">
 										  <input type="text" class="form-control" id="searchName" placeholder="输入您要搜索的过滤字" aria-describedby="basic-addon1">
-										  <span class="input-group-addon" id="searchLabel">搜索</span>
+										  <span class="input-group-addon" id="searchLabel" onclick="javascript:selectChange()">搜索</span>
 										</div>
 									</form>
 								</div>
@@ -170,12 +112,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							        		<tr>
 							        			<th>选择</th>
 							        			<th>用户名</th>
-							        			<th>真实姓名</th>
 							        			<th>职业</th>
 							        			<th>邮箱</th>
 							        			<th>性别</th>
 							        			<th>注册时间</th>
-							        			<th>状态</th>
+							        			<th>用户角色</th>
+							        			<th>排序值</th>
 							        			<th>操作</th>
 							        		</tr>
 							        	</thead>

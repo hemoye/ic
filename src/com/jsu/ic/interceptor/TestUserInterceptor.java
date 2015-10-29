@@ -1,5 +1,12 @@
 package com.jsu.ic.interceptor;
 
+import javax.annotation.Resource;
+
+import org.apache.struts2.ServletActionContext;
+
+import com.jsu.ic.commons.Const;
+import com.jsu.ic.po.User;
+import com.jsu.ic.service.UserService;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.Interceptor;
 
@@ -12,8 +19,8 @@ import com.opensymphony.xwork2.interceptor.Interceptor;
 @SuppressWarnings("serial")
 public class TestUserInterceptor implements Interceptor {
 
-//	@Autowired
-//	public UserInfoService service;
+	@Resource
+	public UserService service;
 
 	@Override
 	public void destroy() {
@@ -24,19 +31,12 @@ public class TestUserInterceptor implements Interceptor {
 	}
 
 	@Override
-	public String intercept(ActionInvocation arg0) throws Exception {
-
-		// SessionUserVO user = (SessionUserVO)
-		// ServletActionContext.getRequest().getSession()
-		// .getAttribute(Const.LOGIN_USER_SESSION_KEY);
-		// if (user == null && Const.TEST_USER_ID > 0L) {
-		//
-		// ServletActionContext.getRequest().getSession()
-		// .setAttribute(Const.LOGIN_USER_SESSION_KEY,
-		// service.login(Const.TEST_USER_ID));
-		// }
-
-		return arg0.invoke();
+	public String intercept(ActionInvocation invoke) throws Exception {
+		User user = (User) ServletActionContext.getContext().getSession().get(Const.LOGIN_USER_SESSION_KEY);
+		if (user == null && Const.TEST_USER_ID > 0L) {
+			ServletActionContext.getContext().getSession().put(Const.LOGIN_USER_SESSION_KEY, service.findById(Const.TEST_USER_ID));
+		}
+		return invoke.invoke();
 	}
 
 }

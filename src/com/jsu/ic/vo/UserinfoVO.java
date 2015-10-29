@@ -2,13 +2,13 @@ package com.jsu.ic.vo;
 
 import java.sql.Timestamp;
 
+import com.jsu.ic.commons.Const;
+
 public class UserinfoVO {
 
 	private Integer userId;
 	private UserofficeVO userofficeVO;
 	private RealinfoVO realinfoVO;
-	private UserVO userVO;
-	private CountyVO countyVO;
 	private String realName;
 	private String userSex;
 	private Timestamp birthday;
@@ -42,29 +42,17 @@ public class UserinfoVO {
 	public void setUserofficeVO(UserofficeVO userofficeVO) {
 		this.userofficeVO = userofficeVO;
 	}
+	
+	public String getOfficeName() {
+		return userofficeVO == null ? "未选择" : userofficeVO.getOfficeName();
+	}
 
 	public RealinfoVO getRealinfoVO() {
 		return realinfoVO;
 	}
-
+	
 	public void setRealinfoVO(RealinfoVO realinfoVO) {
 		this.realinfoVO = realinfoVO;
-	}
-
-	public UserVO getUserVO() {
-		return userVO;
-	}
-
-	public void setUserVO(UserVO userVO) {
-		this.userVO = userVO;
-	}
-
-	public CountyVO getCountyVO() {
-		return countyVO;
-	}
-
-	public void setCountyVO(CountyVO countyVO) {
-		this.countyVO = countyVO;
 	}
 
 	public String getRealName() {
@@ -93,6 +81,10 @@ public class UserinfoVO {
 
 	public Timestamp getRegistTime() {
 		return registTime;
+	}
+	
+	public String getRegist() {
+		return Const.dateToString(registTime);
 	}
 
 	public void setRegistTime(Timestamp registTime) {

@@ -1,10 +1,16 @@
 package com.jsu.ic.base;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.struts2.ServletActionContext;
+
 import com.jsu.ic.commons.Const;
+import com.jsu.ic.commons.JSONSupport;
 import com.jsu.ic.po.User;
 import com.jsu.ic.service.ApplyFriendService;
 import com.jsu.ic.service.CityService;
@@ -43,6 +49,7 @@ public abstract class MyActionSupport<T> extends ActionSupport implements ModelD
 
 	// =============== ModelDriven的支持 ==================
 	protected T model;
+	protected Map<String, Object> msg = new HashMap<String, Object>();
 
 	@SuppressWarnings("unchecked")
 	public MyActionSupport() {
@@ -118,10 +125,44 @@ public abstract class MyActionSupport<T> extends ActionSupport implements ModelD
 		return (User) ActionContext.getContext().getSession().get(Const.LOGIN_USER_SESSION_KEY);
 	}
 
+	/**
+	 * 将key的值value放入session
+	 * 
+	 * @param key
+	 *            标识
+	 * @param value
+	 *            值
+	 */
+	protected void print(String key, Object value) {
+		msg.put(key, value);
+		ServletActionContext.getContext().put(key, msg);
+	}
+
+	/**
+	 * AJAX异步传输、json方式写出数据
+	 * 
+	 * @param value
+	 *            数据
+	 */
+	protected void json(Object value) {
+		try {
+			ServletActionContext.getResponse().getWriter().print(JSONSupport.json(value));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public String outView(String template) {
+		ActionContext.getContext().put("outViewTemplate", template);
+		return "VIEW";
+	}
+
 	// ============== 分页用的参数 =============
 
 	protected int pageNum = 1; // 当前页
 	protected int pageSize = 10; // 每页显示多少条记录
+	protected Date beginTime;
+	protected Date endTime;
 
 	public int getPageNum() {
 		return pageNum;
@@ -137,5 +178,17 @@ public abstract class MyActionSupport<T> extends ActionSupport implements ModelD
 
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
+	}
+
+	public void setBeginTime(Date beginTime) {
+		this.beginTime = beginTime;
+	}
+
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
+
+	public Map<String, Object> getMsg() {
+		return msg;
 	}
 }

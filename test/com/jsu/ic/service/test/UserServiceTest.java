@@ -7,11 +7,9 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.jsu.ic.commons.JSONSupport;
 import com.jsu.ic.commons.MD5;
 import com.jsu.ic.po.User;
 import com.jsu.ic.service.UserService;
-import com.jsu.ic.vo.UserVO;
 
 public class UserServiceTest {
 
@@ -40,12 +38,13 @@ public class UserServiceTest {
 
 	/**
 	 * 测试登陆
-	 * @throws Exception 
+	 * 
+	 * @throws Exception
 	 */
 	@Test
 	public void testLogin() throws Exception {
-		UserVO userVO = service.login("admin", "admin");
-		System.out.println(JSONSupport.json(userVO));
+		User user = service.login("admin", "admin");
+		System.out.println(user);
 	}
 
 	/**
@@ -54,5 +53,13 @@ public class UserServiceTest {
 	@Test
 	public void testFindAll() {
 		System.out.println(service.findAll().size());
+	}
+
+	/**
+	 * 测试分页
+	 */
+	@Test
+	public void testGetPageBean() {
+		System.out.println(service.getPageBean(1, 10, null, null, "", 0).getEndPageIndex());
 	}
 }

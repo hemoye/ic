@@ -4,13 +4,14 @@ import org.apache.struts2.json.annotations.JSON;
 
 /**
  * 
- * 系统异常，key.code对应的编码，异常内容，在国际化资源文件内定义 key暂时只使用code，其他预留先不用哦
+ * 系统异常，key.code对应的编码，异常内容，在国际化资源文件内定义 key暂时只使用code，其他预留先不用
  * 
  * @author hadoop
  * 
  */
 @SuppressWarnings("serial")
 public class CodeException extends RuntimeException {
+
 	private int code;
 	private String key = "code";
 	private String message;

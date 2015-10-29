@@ -1,5 +1,20 @@
 package com.jsu.ic.interceptor;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.sql.Timestamp;
+import java.util.Date;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
+
+import com.jsu.ic.annotation.Log;
+import com.jsu.ic.commons.Const;
+import com.jsu.ic.po.Syslog;
+import com.jsu.ic.po.User;
+import com.jsu.ic.service.SysLogService;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.Interceptor;
 
@@ -9,11 +24,12 @@ import com.opensymphony.xwork2.interceptor.Interceptor;
  * @author hadoop
  * 
  */
-@SuppressWarnings("serial")
 public class LogInterceptor implements Interceptor {
 
-	// @Autowired
-	// private LogService service;
+	private static final long serialVersionUID = -4109623042388223280L;
+	
+	@Resource
+	private SysLogService service;
 
 	@Override
 	public void destroy() {
@@ -25,90 +41,50 @@ public class LogInterceptor implements Interceptor {
 	}
 
 	@Override
-	public String intercept(ActionInvocation arg0) throws Exception {
+	public String intercept(ActionInvocation invok) throws Exception {
+		String method = invok.getProxy().getMethod();
+		if (invok.getAction().getClass().getMethod(method).isAnnotationPresent(Log.class)) {
+			String ret = null;
+			Exception ex = null;
+			HttpServletRequest request = ServletActionContext.getRequest();
+			Log log = invok.getAction().getClass().getMethod(method).getAnnotation(Log.class);
+			Syslog syslog = new Syslog();
+			syslog.setLogIp(request.getRemoteAddr());
+			syslog.setIsSuccess(true);
+			syslog.setLogName(log.value());
+			syslog.setLogTxt("");
+			syslog.setLogTime(new Timestamp(new Date().getTime()));
+			if (request.getSession().getAttribute(Const.LOGIN_USER_SESSION_KEY) == null) {
+				syslog.setUserinfo(null);
+			} else {
+				User user = (User) request.getSession().getAttribute(Const.LOGIN_USER_SESSION_KEY);
+				syslog.setUserinfo(user.getUserinfo());
+			}
+			try {
+				ret = invok.invoke();
+			} catch (Exception e) {
+				ex = e;
+				StringWriter out = new StringWriter();
+				PrintWriter pw = new PrintWriter(out);
+				e.printStackTrace(pw);
+				syslog.setIsSuccess(false);
+				syslog.setLogTxt(out.toString());
+			}
 
-		return null;
-		// String method = arg0.getProxy().getMethod();
-		// if (!"execute".equals(method)) {
-		// method = "do" + method.substring(0, 1).toUpperCase() +
-		// method.substring(1);
-		// }
-		//
-		// if
-		// (arg0.getAction().getClass().getMethod(method).isAnnotationPresent(Log.class))
-		// {
-		// String ret = null;
-		// Exception ex = null;
-		// HttpServletRequest request = ServletActionContext.getRequest();
-		// Log log =
-		// arg0.getAction().getClass().getMethod(method).getAnnotation(Log.class);
-		// Logs logs = new Logs();
-		// logs.setD(Const.getDate());
-		// logs.setDoing(log.value());
-		// logs.setIp(request.getRemoteAddr());
-		// logs.setSuccess(true);
-		// if (!log.excludeAll()) {
-		// Map<String, String[]> pm = new HashMap<String, String[]>();
-		// Set<String> es = new HashSet<String>();
-		// java.util.Collections.addAll(es, log.exclude());
-		// for (Object k : request.getParameterMap().keySet()) {
-		// String key = (String) k;
-		// if (!es.contains(key)) {
-		// pm.put(key, request.getParameterValues(key));
-		// }
-		// }
-		// String ps = JSONUtil.serialize(pm);
-		// if (ps.length() > 2) {// {}
-		// logs.setParam(new Content(UUID.randomUUID().toString(), ps));
-		// }
-		//
-		// }
-		// logs.setUri(request.getRequestURI().substring(request.getContextPath().length()));
-		// if (request.getSession().getAttribute(Const.LOGIN_USER_SESSION_KEY)
-		// == null) {
-		// logs.setUserId(0L);
-		// logs.setUserRealName("游客");
-		// } else {
-		// SessionUserVO user = (SessionUserVO)
-		// request.getSession().getAttribute(Const.LOGIN_USER_SESSION_KEY);
-		// logs.setUserId(user.getUserId());
-		// logs.setUserRealName(user.getUserRealName());
-		// }
-		//
-		// try {
-		// ret = arg0.invoke();
-		// } catch (Exception e) {
-		// ex = e;
-		// StringWriter out = new StringWriter();
-		// PrintWriter pw = new PrintWriter(out);
-		// e.printStackTrace(pw);
-		// logs.setSuccess(false);
-		// logs.setMsg(new Content(UUID.randomUUID().toString(),
-		// out.toString()));
-		//
-		// }
-		//
-		// if (logs.getUserId() == 0 &&
-		// request.getSession().getAttribute(Const.LOGIN_USER_SESSION_KEY) !=
-		// null) {
-		// SessionUserVO user = (SessionUserVO)
-		// request.getSession().getAttribute(Const.LOGIN_USER_SESSION_KEY);
-		// logs.setUserId(user.getUserId());
-		// logs.setUserRealName(user.getUserRealName());
-		// }
-		//
-		// service.add(logs);
-		//
-		// if (ex == null) {
-		// return ret;
-		// } else {
-		// throw ex;
-		// }
-		//
-		// } else {
-		// return arg0.invoke();
-		//
-		// }
+			if (syslog.getUserinfo() == null && request.getSession().getAttribute(Const.LOGIN_USER_SESSION_KEY) != null) {
+				User user = (User) request.getSession().getAttribute(Const.LOGIN_USER_SESSION_KEY);
+				syslog.setUserinfo(user.getUserinfo());
+			}
+			service.save(syslog);
+
+			if (ex == null) {
+				return ret;
+			} else {
+				throw ex;
+			}
+		} else {
+			return invok.invoke();
+		}
 
 	}
 

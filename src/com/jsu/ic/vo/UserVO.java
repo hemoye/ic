@@ -10,7 +10,7 @@ import com.jsu.ic.annotation.PO2VO;
  * @author hadoop
  * 
  */
-@PO2VO({ "userinfo" })
+@PO2VO({ "userinfo", "userrole" })
 public class UserVO {
 
 	private Integer userId;
@@ -24,7 +24,8 @@ public class UserVO {
 	private Integer status;
 	private Boolean isDelete;
 	private Integer sortNumber;
-	
+
+	private UserroleVO userroleVO;
 	private UserinfoVO userinfoVO;
 
 	public UserVO() {
@@ -64,7 +65,7 @@ public class UserVO {
 	}
 
 	public String getUserEmail() {
-		return userEmail;
+		return userEmail == null ? "未填写" : userEmail;
 	}
 
 	public void setUserEmail(String userEmail) {
@@ -117,6 +118,14 @@ public class UserVO {
 
 	public void setSortNumber(Integer sortNumber) {
 		this.sortNumber = sortNumber;
+	}
+
+	public UserroleVO getUserroleVO() {
+		return userroleVO;
+	}
+
+	public void setUserroleVO(UserroleVO userroleVO) {
+		this.userroleVO = userroleVO;
 	}
 
 	public UserinfoVO getUserinfoVO() {

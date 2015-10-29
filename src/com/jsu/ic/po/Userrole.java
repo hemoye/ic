@@ -4,123 +4,116 @@ import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
-
 /**
  * Userrole entity. @author MyEclipse Persistence Tools
  */
 
-public class Userrole  implements java.io.Serializable {
+public class Userrole implements java.io.Serializable {
 
+	// Fields
 
-    // Fields    
+	private Integer roleId;
+	private String roleName;
+	private Timestamp addTime;
+	private Timestamp updateTime;
+	private Boolean isDelete;
+	private Integer sortNumber;
+	private Set powers = new HashSet(0);
+	private Set users = new HashSet(0);
 
-     private Integer roleId;
-     private String roleName;
-     private Timestamp addTime;
-     private Timestamp updateTime;
-     private Boolean isDelete;
-     private Integer sortNumber;
-     private Set powers = new HashSet(0);
-     private Set users = new HashSet(0);
+	// Constructors
 
+	/** default constructor */
+	public Userrole() {
+	}
 
-    // Constructors
-
-    /** default constructor */
-    public Userrole() {
-    }
+	public Userrole(Integer roleId) {
+		this.roleId = roleId;
+	}
 
 	/** minimal constructor */
-    public Userrole(String roleName, Timestamp addTime, Timestamp updateTime) {
-        this.roleName = roleName;
-        this.addTime = addTime;
-        this.updateTime = updateTime;
-    }
-    
-    /** full constructor */
-    public Userrole(String roleName, Timestamp addTime, Timestamp updateTime, Boolean isDelete, Integer sortNumber, Set powers, Set users) {
-        this.roleName = roleName;
-        this.addTime = addTime;
-        this.updateTime = updateTime;
-        this.isDelete = isDelete;
-        this.sortNumber = sortNumber;
-        this.powers = powers;
-        this.users = users;
-    }
+	public Userrole(String roleName, Timestamp addTime, Timestamp updateTime) {
+		this.roleName = roleName;
+		this.addTime = addTime;
+		this.updateTime = updateTime;
+	}
 
-   
-    // Property accessors
+	/** full constructor */
+	public Userrole(String roleName, Timestamp addTime, Timestamp updateTime, Boolean isDelete, Integer sortNumber, Set powers,
+			Set users) {
+		this.roleName = roleName;
+		this.addTime = addTime;
+		this.updateTime = updateTime;
+		this.isDelete = isDelete;
+		this.sortNumber = sortNumber;
+		this.powers = powers;
+		this.users = users;
+	}
 
-    public Integer getRoleId() {
-        return this.roleId;
-    }
-    
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
-    }
+	// Property accessors
 
-    public String getRoleName() {
-        return this.roleName;
-    }
-    
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
+	public Integer getRoleId() {
+		return this.roleId;
+	}
 
-    public Timestamp getAddTime() {
-        return this.addTime;
-    }
-    
-    public void setAddTime(Timestamp addTime) {
-        this.addTime = addTime;
-    }
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
+	}
 
-    public Timestamp getUpdateTime() {
-        return this.updateTime;
-    }
-    
-    public void setUpdateTime(Timestamp updateTime) {
-        this.updateTime = updateTime;
-    }
+	public String getRoleName() {
+		return this.roleName;
+	}
 
-    public Boolean getIsDelete() {
-        return this.isDelete;
-    }
-    
-    public void setIsDelete(Boolean isDelete) {
-        this.isDelete = isDelete;
-    }
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
 
-    public Integer getSortNumber() {
-        return this.sortNumber;
-    }
-    
-    public void setSortNumber(Integer sortNumber) {
-        this.sortNumber = sortNumber;
-    }
+	public Timestamp getAddTime() {
+		return this.addTime;
+	}
 
-    public Set getPowers() {
-        return this.powers;
-    }
-    
-    public void setPowers(Set powers) {
-        this.powers = powers;
-    }
+	public void setAddTime(Timestamp addTime) {
+		this.addTime = addTime;
+	}
 
-    public Set getUsers() {
-        return this.users;
-    }
-    
-    public void setUsers(Set users) {
-        this.users = users;
-    }
-   
+	public Timestamp getUpdateTime() {
+		return this.updateTime;
+	}
 
+	public void setUpdateTime(Timestamp updateTime) {
+		this.updateTime = updateTime;
+	}
 
+	public Boolean getIsDelete() {
+		return this.isDelete;
+	}
 
+	public void setIsDelete(Boolean isDelete) {
+		this.isDelete = isDelete;
+	}
 
+	public Integer getSortNumber() {
+		return this.sortNumber;
+	}
 
+	public void setSortNumber(Integer sortNumber) {
+		this.sortNumber = sortNumber;
+	}
 
+	public Set getPowers() {
+		return this.powers;
+	}
 
+	public void setPowers(Set powers) {
+		this.powers = powers;
+	}
+
+	public Set getUsers() {
+		return this.users;
+	}
+
+	public void setUsers(Set users) {
+		this.users = users;
+	}
 
 }

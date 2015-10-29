@@ -13,6 +13,9 @@
         <many-to-one name="userinfo" class="com.jsu.ic.po.Userinfo" fetch="select">
             <column name="userId" />
         </many-to-one>
+        <property name="logName" type="java.lang.String">
+            <column name="logName" length="40" />
+        </property>
         <property name="logTxt" type="java.lang.String">
             <column name="logTxt" length="65535" not-null="true" />
         </property>
@@ -22,8 +25,8 @@
         <property name="logIp" type="java.lang.String">
             <column name="logIP" length="20" not-null="true" />
         </property>
-        <property name="isDelete" type="java.lang.Boolean">
-            <column name="isDelete" />
+        <property name="isSuccess" type="java.lang.Boolean">
+            <column name="isSuccess" />
         </property>
         <property name="sortNumber" type="java.lang.Integer">
             <column name="sortNumber" />

@@ -24,6 +24,7 @@ public class CharacterEncodingInterceptor implements Interceptor {
 	 * 
 	 */
 	private static final long serialVersionUID = 7951533924732170327L;
+
 	private static final String n = Long.toString(serialVersionUID, 16);
 
 	@Override
@@ -36,15 +37,14 @@ public class CharacterEncodingInterceptor implements Interceptor {
 	}
 
 	@Override
-	public String intercept(ActionInvocation arg0) throws Exception {
-
-		HttpServletRequest request = (HttpServletRequest) arg0.getInvocationContext().get(StrutsStatics.HTTP_REQUEST);
+	public String intercept(ActionInvocation invoke) throws Exception {
+		HttpServletRequest request = (HttpServletRequest) invoke.getInvocationContext().get(StrutsStatics.HTTP_REQUEST);
 
 		if (request.getAttribute(n) == null) {
 			request.setAttribute(n, true);
 
 			request.setCharacterEncoding("UTF-8");
-			HttpServletResponse response = (HttpServletResponse) arg0.getInvocationContext().get(StrutsStatics.HTTP_RESPONSE);
+			HttpServletResponse response = (HttpServletResponse) invoke.getInvocationContext().get(StrutsStatics.HTTP_RESPONSE);
 			response.setCharacterEncoding("UTF-8");
 
 			if ("GET".equals(request.getMethod().toUpperCase())) {
@@ -61,7 +61,7 @@ public class CharacterEncodingInterceptor implements Interceptor {
 				}
 			}
 		}
-		return arg0.invoke();
+		return invoke.invoke();
 	}
 
 }

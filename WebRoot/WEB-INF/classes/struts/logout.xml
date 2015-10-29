@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+	
+	<!-- 测试Struts2是否配置成功 -->
+	<package name="logout" namespace="/" extends="my-default">
+		<action name="logout_*" class="logoutAction" method="{1}">
+			<result name="index">/WEB-INF/frontstage/index.jsp</result>
+		</action>
+	</package>
+
+</struts>	
