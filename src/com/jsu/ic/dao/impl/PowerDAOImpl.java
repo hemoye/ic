@@ -17,7 +17,7 @@ public class PowerDAOImpl extends DaoSupportImpl<Power> implements PowerDAO {
 	public List<Power> findByRole(Userrole userrole) {
 		log.debug("find Power by userrole: " + userrole.getRoleId());
 		try {
-			String queryString = "from Power as model where model.userrole.roleId = ? and model.power is null";
+			String queryString = "from Power as model where model.userrole.roleId = ? and model.power is null and isDelete = 0";
 			return getSession().createQuery(queryString).setParameter(0, userrole.getRoleId()).list();
 		} catch (RuntimeException re) {
 			log.error("find failed", re);

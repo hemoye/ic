@@ -46,7 +46,7 @@
 			<interceptor name="LogInterceptor" class="com.jsu.ic.interceptor.LogInterceptor" />
 
 			<interceptor-stack name="myInterceptorStack">
-				<interceptor-ref name="TestUserInterceptor" /><!-- 自动添加一个登陆用户，开发测试用，发布时，请删除 -->
+				<interceptor-ref name="TestUserInterceptor" />
 				<interceptor-ref name="CharacterEncodingInterceptor" /><!-- 
 					Action之前，编码设置，一开始就设置好，所以放最前面 -->
 				<interceptor-ref name="ErrorPageInterceptor" /><!-- Action之后，日志记录 -->

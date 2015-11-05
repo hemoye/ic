@@ -62,13 +62,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div id="content" class="col-lg-10 col-md-10">
 					<!-- nav breadcrumb start -->
 					<ol class="breadcrumb">
-					  <li><a href="manage/user/userUI.action"><span class="fa fa-home"></span>&nbsp;用户管理</a></li>
+					  <li><a href="manage/user/index.html"><span class="fa fa-user"></span>&nbsp;用户管理</a></li>
 					  <li class="active">用户列表</li>
 					</ol>
 					<!-- nav breadcrumb end -->		
 					<div class="row" style="padding-top: 0;">
 						<div class="panel panel-default">
-							<div class="panel-heading"><span class="fa fa-list"></span>&nbsp;用户列表</div>
+							<div class="panel-heading"><span class="fa fa-user"></span>&nbsp;用户列表</div>
 							<div class="panel-body">
 								<div class="btn-group form-inline" role="group">
 									<input type="button" class="button button-small checkall" name="checkall" checkfor="id" value="全选">
@@ -79,7 +79,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							    		<option value="2">院级管理员</option>
 							    		<option value="3">校级管理员</option>
 							    		<option value="4">班级管理员</option>
-							    		<option value="5">班级管理员</option>
+							    		<option value="5">普通用户</option>
 									  </select>
 									  <span class="input-group-addon">
 				                      </span>
@@ -87,7 +87,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							    		<option value="10">每页10条</option>
 							    		<option value="5">每页5条</option>
 							    		<option value="20">每页20条</option>
-							    		<option value="500">每页50条</option>
+							    		<option value="50">每页50条</option>
 									  </select>
 									  <span class="input-group-addon">
 				                      </span>

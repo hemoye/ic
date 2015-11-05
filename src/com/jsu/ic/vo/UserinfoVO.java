@@ -42,7 +42,7 @@ public class UserinfoVO {
 	public void setUserofficeVO(UserofficeVO userofficeVO) {
 		this.userofficeVO = userofficeVO;
 	}
-	
+
 	public String getOfficeName() {
 		return userofficeVO == null ? "未选择" : userofficeVO.getOfficeName();
 	}
@@ -50,7 +50,7 @@ public class UserinfoVO {
 	public RealinfoVO getRealinfoVO() {
 		return realinfoVO;
 	}
-	
+
 	public void setRealinfoVO(RealinfoVO realinfoVO) {
 		this.realinfoVO = realinfoVO;
 	}
@@ -82,7 +82,7 @@ public class UserinfoVO {
 	public Timestamp getRegistTime() {
 		return registTime;
 	}
-	
+
 	public String getRegist() {
 		return Const.dateToString(registTime);
 	}
@@ -170,5 +170,5 @@ public class UserinfoVO {
 	public void setSortNumber(Integer sortNumber) {
 		this.sortNumber = sortNumber;
 	}
-
+	
 }

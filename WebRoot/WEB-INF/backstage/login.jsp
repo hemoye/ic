@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<form id="frmUserLogin" action="manage/login/login.html" method="POST" class="form-horizontal">
 	          <div class="modal-header">
 	            <h4 class="modal-title">
-	              <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;旧城微雨-后台登录
+	              <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;旧城微语-后台登录
 	            </h4>
 	          </div>
 	          <div class="modal-body">

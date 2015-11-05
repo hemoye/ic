@@ -1,6 +1,5 @@
 package com.jsu.ic.action.back;
 
-import org.apache.struts2.ServletActionContext;
 import org.springframework.stereotype.Controller;
 
 import com.jsu.ic.annotation.Log;
@@ -8,6 +7,7 @@ import com.jsu.ic.base.MyActionSupport;
 import com.jsu.ic.commons.Const;
 import com.jsu.ic.exception.CodeException;
 import com.jsu.ic.po.User;
+import com.opensymphony.xwork2.ActionContext;
 
 @Controller
 public class LoginAction extends MyActionSupport<User> {
@@ -40,7 +40,7 @@ public class LoginAction extends MyActionSupport<User> {
 			print(Const.MESSAGE_KEY, Const.getMessage("code.13"));
 			throw new CodeException(13);
 		}
-		ServletActionContext.getContext().getSession().put(Const.LOGIN_USER_SESSION_KEY, model);
+		ActionContext.getContext().getSession().put(Const.LOGIN_USER_SESSION_KEY, model);
 		if (!Const.loginUsers.contains(model)) {
 			Const.loginUsers.add(model);
 		}

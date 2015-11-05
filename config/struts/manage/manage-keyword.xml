@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+	
+	<package name="keywordManage" namespace="/manage" extends="my-default">
+		<action name="keyword_*" class="keyWordAction" method="{1}">
+			<result name="index">/WEB-INF/backstage/keyword/keyword-list.jsp</result>
+			<result name="detail">/WEB-INF/backstage/keyword/keyword-detail.jsp</result>
+		</action>
+	</package>
+
+</struts>	

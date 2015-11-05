@@ -22,7 +22,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="<%=basePath%>backstage/css/bootstrap.min.css" rel="stylesheet">       
     <link rel="stylesheet" href="<%=basePath%>backstage/css/font-awesome.min.css">
     <link rel="stylesheet" href="<%=basePath%>backstage/css/ui-dialog.css">
-	<script src="<%=basePath%>backstage/js/dialog-min.js"></script>
+	<script src="<%=basePath%>backstage/js/sea.js"></script>
+	<script src="<%=basePath%>backstage/js/dialog-plus-min.js"></script>
 
   </head>
   
@@ -37,7 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </button>    
             
         	<div class="navbar-header">
-            	<a class="navbar-brand" href="manage/admin/adminindex.action"><strong>旧城微雨</strong> <span class="hidden-xs">后台管理</span></a>
+            	<a class="navbar-brand" href="manage/index.html"><strong>旧城微雨</strong> <span class="hidden-xs">后台管理</span></a>
             </div>
             <div class="collapse navbar-collapse pull-right" id="navbar-main">	            	
                 <ul class="nav navbar-nav">

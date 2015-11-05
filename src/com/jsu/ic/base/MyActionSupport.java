@@ -122,7 +122,8 @@ public abstract class MyActionSupport<T> extends ActionSupport implements ModelD
 	 * @return 当前登录的用户实体
 	 */
 	protected User getCurrentUser() {
-		return (User) ActionContext.getContext().getSession().get(Const.LOGIN_USER_SESSION_KEY);
+		User user = (User) ActionContext.getContext().getSession().get(Const.LOGIN_USER_SESSION_KEY);
+		return user;
 	}
 
 	/**
@@ -147,6 +148,19 @@ public abstract class MyActionSupport<T> extends ActionSupport implements ModelD
 	protected void json(Object value) {
 		try {
 			ServletActionContext.getResponse().getWriter().print(JSONSupport.json(value));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * AJAX方式异步写出字符串数据
+	 * 
+	 * @param value
+	 */
+	protected void json(String value) {
+		try {
+			ServletActionContext.getResponse().getWriter().print(value);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

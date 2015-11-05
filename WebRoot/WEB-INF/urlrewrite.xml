@@ -5,12 +5,17 @@
 <!-- 		<to>testStruts2Action.action</to> -->
 <!-- 	</rule> -->
 	<rule>
-		<from>^/manage/([0-9a-zA-Z]+)/([0-9a-zA-Z]+).html</from>
+		<from>^/manage/([a-zA-Z]+)/([a-zA-Z]+).html</from>
 		<to type="forward">manage/$1_$2.action</to>
 	</rule>
 	
 	<rule>
-		<from>^/manage/([0-9a-zA-Z]+).html</from>
+		<from>^/manage/([a-zA-Z]+)/([a-zA-Z]+)/([0-9a-zA-Z]+).html</from>
+		<to type="forward">manage/$1_$2.action?userId=$3</to>
+	</rule>
+	
+	<rule>
+		<from>^/manage/([a-zA-Z]+).html</from>
 		<to type="forward">manage/$1_index.action</to>
 	</rule>
 	

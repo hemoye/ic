@@ -75,6 +75,7 @@ public class LogInterceptor implements Interceptor {
 				User user = (User) request.getSession().getAttribute(Const.LOGIN_USER_SESSION_KEY);
 				syslog.setUserinfo(user.getUserinfo());
 			}
+			System.out.println(syslog.getLogTxt());
 			service.save(syslog);
 
 			if (ex == null) {

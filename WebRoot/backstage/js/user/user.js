@@ -1,5 +1,5 @@
 $(function() {
-	init(1, $("#pageSize").val(), $("#begindatetimepicker").val(), $("#enddatetimepicker").val(), $("#searchName").val(), $("#roleId").val());
+	pagefind(1);
 });
 
 function init(pageNum, pageSize, beginTime, endTime, userName, roleId) {
@@ -21,8 +21,11 @@ function init(pageNum, pageSize, beginTime, endTime, userName, roleId) {
 				addData(data);
 			} else {
 				dialog({
-					title : ' ',
-					content : '没有更多您要检索的数据了！'
+					title : '提示',
+					content : '没有更多您要检索的数据了',
+					ok : function() {
+					},
+					statusbar : '<label><input type="checkbox">不再提醒</label>'
 				}).show();
 			}
 		}
@@ -36,15 +39,25 @@ function addData(data) {
 		$("#data-filter")
 				.append(
 						"<tr><td><input type='checkbox' name='id' value='"
-								+ tmp.userId + "' /></td><td>" + tmp.userName
-								+ "</td><td>" + tmp.userinfoVO.officeName
-								+ "</td><td>" + tmp.userEmail + "</td><td>"
-								+ tmp.userinfoVO.userSex + "</td><td>" + tmp.userinfoVO.regist
-								+ "</td><td>" + tmp.userroleVO.roleName
-								+ "</td><td>" + tmp.sortNumber
+								+ tmp.userId
+								+ "' /></td><td>"
+								+ tmp.userName
+								+ "</td><td>"
+								+ tmp.userinfoVO.officeName
+								+ "</td><td>"
+								+ tmp.userEmail
+								+ "</td><td>"
+								+ tmp.userinfoVO.userSex
+								+ "</td><td>"
+								+ tmp.userinfoVO.regist
+								+ "</td><td>"
+								+ tmp.userroleVO.roleName
+								+ "</td><td>"
+								+ tmp.sortNumber
 								+ "</td><td><div class='dropdown'><button class='button button-small dropdown-toggle' type='button' id='dropdownMenu1' data-toggle='dropdown' aria-expanded='true'><span class='fa fa-cog'></span><span class='caret'></span></button><ul class='dropdown-menu' role='menu' aria-labelledby='dropdownMenu1'>"
 								+ "<li role='presentation'><a role='menuitem' tabindex='-1' href='javascript:detail("
-								+ tmp.userId + ")'>1. 查看</a></li>"
+								+ tmp.userId
+								+ ")'>1. 查看</a></li>"
 								+ "<li role='presentation'><a role='menuitem' tabindex='-1' href='javascript:power("
 								+ tmp.userId + ")'>2. 权限</a></li>"
 								+ "</ul></div></td></tr>");
@@ -57,68 +70,47 @@ function pagefind(pageNum) {
 }
 
 function selectChange() {
-	init(1, $("#pageSize").val(), $("#begindatetimepicker").val(), $("#enddatetimepicker").val(), $("#searchName").val(), $("#roleId").val());
+	pagefind(1);
 }
 
 function detail(userId) {
-	window.location = "manage/user/userdetail.action?userId=" + userId;
+	dialog({
+		title : '用户详细信息',
+		url : 'manage/user/detail/' + userId + '.html',
+		width : '400px',
+		okValue : '确定',
+		ok : function() {
+		},
+	}).show();
 }
 
-function deleteType(filterId) {
-	var currentPage = $("#pagelist .active > a").html();
-	$.ajax({
-		url : "manage/user/userdelete.action",
-		data : "filterId=" + filterId,
-		type : "post",
-		success : function(data) {
-			if (data == "1") {
-				myAlert("删除成功");
-				getData(currentPage, '');
-			} else {
-				myAlert(data);
-			}
-		}
-	});
-}
-
-function deleteByIds() {
-	var currentPage = $("#pagelist .active > a").html();
-	var filterId = '';
-	$("[name=id]:checked").each(function(index) {
-		filterId += $(this).val() + ",";
-	});
-	$.ajax({
-		url : "manage/filter/filterdeleteByIds.action",
-		data : "filterIds=" + filterId,
-		type : "post",
-		success : function(data) {
-			if (data == "1") {
-				myAlert("删除成功");
-				getData(currentPage, $("#searchName").val());
-			} else {
-				myAlert(data);
-			}
-		}
-	});
-}
-
-function update(filterId) {
-	$("#addType").modal('hide');
-	var filterName = $("#rootName").val();
-	var filterDesc = $("#filterDesc").val();
-	var currentPage = $("#pagelist .active > a").html();
-	$.ajax({
-		url : "manage/user/userupdate.action",
-		data : "filterId=" + filterId + "&filterContext=" + filterName
-				+ "&replaceTo=" + filterDesc,
-		type : "post",
-		success : function(data) {
-			if (data == "1") {
-				myAlert("修改成功");
-				getData(currentPage, $("#searchName").val());
-			} else {
-				myAlert(data);
-			}
-		}
-	});
+function power(userId) {
+	var data = $('<div class="form-group"><label class="col-md-3 control-label">权限列表：</label><select class="col-md-6" id="newRoleId" class="form-control pull-right"><option value="2">院校管理员</option><option value="3">系别管理员</option><option value="4">班级管理员</option></select></div>');
+	dialog({
+		title : '分配角色',
+		content: data,
+		width : '400px',
+		okValue : '确定',
+		ok : function() {
+			$.ajax({
+				url : "manage/user/role.html",
+				data : "userId=" + userId + "&param=" + $("#newRoleId").val(),
+				type : "post",
+				success : function(data) {
+					dialog({
+						title : '提示',
+						content : data,
+						width : '200px',
+						okValue : '确定',
+						ok : function() {
+							init($("#pagelist .active > a").val(), $("#pageSize").val(), $("#begindatetimepicker").val(), $("#enddatetimepicker").val(), $("#searchName").val(), $("#roleId").val());
+						},
+					}).show();
+					
+				}
+			});
+		},
+		cancelValue: '取消',
+	    cancel: function () {}
+	}).show();
 }

@@ -7,6 +7,7 @@
 	<package name="userManage" namespace="/manage" extends="my-default">
 		<action name="user_*" class="userManageAction" method="{1}">
 			<result name="index">/WEB-INF/backstage/user/user-list.jsp</result>
+			<result name="detail">/WEB-INF/backstage/user/user-detail.jsp</result>
 		</action>
 	</package>
 

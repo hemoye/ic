@@ -1,18 +1,31 @@
 $(function() {
-	getData(1);
+	init(1, $("#pageSize").val(), $("#begindatetimepicker").val(), $("#enddatetimepicker").val());
 });
 
-function getData(currentPage) {
+function init(pageNum, pageSize, beginTime, endTime, userName, roleId) {
+	var params = "pageNum=" + pageNum + "&pageSize=" + pageSize;
+	if (beginTime != null && beginTime != "") {
+		params += "&beginTime=" + beginTime;
+	}
+	if (endTime != null && endTime != "") {
+		params += "&endTime=" + endTime;
+	}
 	$.ajax({
-		url : "manage/head/headgetData.action",
-		data : "currentPage=" + currentPage,
+		url : "manage/head/loadData.html",
+		data : params,
 		type : "post",
 		dataType : "json",
 		success : function(data) {
 			if (data.recordList.length > 0) {
 				addData(data);
 			} else {
-				myAlert("没有您检索的数据");
+				dialog({
+					title : '提示',
+					content : '没有更多您要检索的数据了',
+					ok : function() {
+					},
+					statusbar : '<label><input type="checkbox">不再提醒</label>'
+				}).show();
 			}
 		}
 	});
@@ -21,108 +34,56 @@ function getData(currentPage) {
 function addData(data) {
 	$("#data-filter").html("");
 	for ( var i = 0; i < data.recordList.length; i++) {
+		var tmp = data.recordList[i];
 		$("#data-filter")
-				.append(
-						"<div class='col-md-3 col-xs-12'><div class='panel panel-default'><div class='panel-body text-center'><img width='180px;' heigth='60px;' src='"
-								+ data.recordList[i].headUrl
-								+ "' class='img-responsive' style='display: inline;' /></div><div class='panel-heading'><input type='checkbox' name='id' value='"
-								+ data.recordList[i].headId
-								+ "' ><div class='pull-right'>添加时间: "
-								+ data.recordList[i].times
-								+ "</div></div></div></div>");
+			.append(
+				"<div class='col-md-3 col-xs-12'><div class='panel panel-default'><div class='panel-body text-center'><img width='180px;' heigth='60px;' src='"
+						+ tmp.headUrl
+						+ "' class='img-responsive' style='display: inline;' /></div><div class='panel-heading'><input type='checkbox' name='id' value='"
+						+ tmp.headId
+						+ "' ><div class='pull-right'>添加时间: "
+						+ tmp.timeAdd
+						+ "</div></div></div></div>");
 	}
-	$("#pagelist").html("");
-	var begin = data.currentPage - 3;
-	var end = data.currentPage + 1;
-	var pre = data.currentPage - 1;
-	var next = data.currentPage + 1;
-	if (begin >= 0) {
-		begin++;
-	} else {
-		begin = 1;
-	}
-	if (end < 4) {
-		end = 4;
-	}
-	if (end < data.pageCount) {
-		end++;
-	} else {
-		end = data.pageCount;
-	}
-	if (begin > 1) {
-		$("#pagelist").append(
-				"<li><a href='javascript:pagefind(1)'>首页</a></li>");
-	}
-	if (begin == data.currentPage) {
-		$("#pagelist")
-				.append(
-						"<li class='disabled'><a href='javascript:void(0)' aria-label='Previous'><span aria-hidden='true'>上一页</span></a></li>");
-	} else {
-		$("#pagelist")
-				.append(
-						"<li><a href='javascript:pagefind("
-								+ pre
-								+ ")' aria-label='Previous'><span aria-hidden='true'>上一页</span></a></li>");
-	}
-	for ( var i = begin; i <= end; i++) {
-		if (i == data.currentPage) {
-			$("#pagelist").append(
-					"<li class='active'><a href='javascript:void(0)'>" + i
-							+ "</a></li>");
-		} else {
-			$("#pagelist").append(
-					"<li><a href='javascript:pagefind(" + i + ")'>" + i
-							+ "</a></li>");
-		}
-	}
-	if (data.endPageIndex == data.currentPage) {
-		$("#pagelist")
-				.append(
-						"<li class='disabled'><a href='javascript:void(0)' aria-label='Next'><span aria-hidden='true'>下一页</span></a></li>");
-	} else {
-		$("#pagelist")
-				.append(
-						"<li><a href='javascript:pagefind("
-								+ next
-								+ ")' aria-label='Next'><span aria-hidden='true'>下一页</span></a></li>");
-	}
-	if (end < data.endPageIndex) {
-		$("#pagelist").append(
-				"<li><a href='javascript:pagefind(" + data.pageCount
-						+ ")'>尾页</a></li>");
-	}
-	if ($(".exits-pagecount").html() == undefined) {
-		$("#pageCount").append(
-				"<div class='exits-pagecount pull-right'><strong>"
-						+ data.recordCount + "条记录 共" + data.pageCount
-						+ "页</strong></div>");
-	} else {
-		$(".exits-pagecount").html(
-				"<strong>" + data.recordCount + "条记录 共" + data.pageCount
-						+ "页</strong>")
-	}
+	loadPageInfo(data);
 }
 
-function pagefind(currentPage) {
-	getData(currentPage);
+function pagefind(pageNum) {
+	init(pageNum, $("#pageSize").val(), $("#begindatetimepicker").val(), $("#enddatetimepicker").val());
+}
+
+function selectChange() {
+	init(1, $("#pageSize").val(), $("#begindatetimepicker").val(), $("#enddatetimepicker").val());
 }
 
 function deleteByIds() {
-	var currentPage = $("#pagelist .active > a").html();
+	var pageNum = $("#pagelist .active > a").html();
 	var headId = '';
 	$("[name=id]:checked").each(function(index) {
 		headId += $(this).val() + ",";
 	});
 	$.ajax({
-		url : "manage/head/headdeleteByIds.action",
+		url : "manage/head/deleteByIds.html",
 		data : "headIds=" + headId,
 		type : "post",
 		success : function(data) {
 			if (data == "1") {
-				myAlert("删除成功");
-				getData(currentPage);
+				dialog({
+					title : '提示',
+					content : '删除成功！',
+					ok : function() {
+					},
+					statusbar : '<label><input type="checkbox">不再提醒</label>'
+				}).show();
+				init(pageNum, $("#pageSize").val(), $("#begindatetimepicker").val(), $("#enddatetimepicker").val());
 			} else {
-				myAlert(data);
+				dialog({
+					title : '提示',
+					content : data,
+					ok : function() {
+					},
+					statusbar : '<label><input type="checkbox">不再提醒</label>'
+				}).show();
 			}
 		}
 	});

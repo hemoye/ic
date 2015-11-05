@@ -2,11 +2,10 @@ package com.jsu.ic.interceptor;
 
 import javax.annotation.Resource;
 
-import org.apache.struts2.ServletActionContext;
-
 import com.jsu.ic.commons.Const;
 import com.jsu.ic.po.User;
 import com.jsu.ic.service.UserService;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.Interceptor;
 
@@ -32,9 +31,9 @@ public class TestUserInterceptor implements Interceptor {
 
 	@Override
 	public String intercept(ActionInvocation invoke) throws Exception {
-		User user = (User) ServletActionContext.getContext().getSession().get(Const.LOGIN_USER_SESSION_KEY);
+		User user = (User) ActionContext.getContext().getSession().get(Const.LOGIN_USER_SESSION_KEY);
 		if (user == null && Const.TEST_USER_ID > 0L) {
-			ServletActionContext.getContext().getSession().put(Const.LOGIN_USER_SESSION_KEY, service.findById(Const.TEST_USER_ID));
+			ActionContext.getContext().getSession().put(Const.LOGIN_USER_SESSION_KEY, service.findById(Const.TEST_USER_ID));
 		}
 		return invoke.invoke();
 	}
